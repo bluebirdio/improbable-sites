@@ -3,6 +3,9 @@ import uvicorn
 
 api = FastAPI()
 
+api.title = 'Sites'
+api.openapi_url = "/v1/openapi.json"
+
 
 @api.get("/")
 def read_root():
