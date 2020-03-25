@@ -1,4 +1,14 @@
+# Main FastAPI functionality
 fastapi
 uvicorn
-databases
-databases[sqlite]
+
+# Database support
+sqlalchemy
+fastapi-sqlalchemy
+sqlalchemy_utils
+
+
+# Models and nice-looking hash names
+python-slugify
+shortuuid
+email-validator
