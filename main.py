@@ -29,4 +29,4 @@ router.include_router(repositories, prefix="/repositories", tags=["Repositories"
 api.include_router(router, prefix="/v1")
 
 if __name__ == "__main__":
-    uvicorn.run(api, host="0.0.0.0", port=8000)
+    uvicorn.run(api, host=LISTEN_HOST, port=LISTEN_PORT)
