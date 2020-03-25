@@ -1,1 +1,3 @@
-DATABASE_URL = "sqlite:////Users/allie/Sites/bluebirdio/improbable-sites/improbable.db"
+from os import environ
+
+DATABASE_URL = environ.get('DATABASE_URL')
