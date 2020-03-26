@@ -11,7 +11,7 @@ The application can be started with e.g. `uvicorn main:api --host 0.0.0.0 --port
 
 Once it's running, th documentation for the API will be available at the following URLs:
 
-* http://DATABASE_URL:LISTEN_PORT/docs (Swagger UI)
-* http://DATABASE_URL:LISTEN_PORT/redoc (ReDoc)
+* http://0.0.0.0:8000/docs (Swagger UI)
+* http://0.0.0.0:8000/redoc (ReDoc)
 
 The Swagger UI documentation allows you to make API calls via its web interface.
