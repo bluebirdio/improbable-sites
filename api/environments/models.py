@@ -1,5 +1,6 @@
 from api.core.models import *
+from .values import ProductionLevel
 
 
 class Environment(HasDescription, ImprobableTextIdentified, ImprobableBaseModel):
-    pass
+    production_level: ProductionLevel = ...
