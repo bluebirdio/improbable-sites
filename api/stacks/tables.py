@@ -1,9 +1,8 @@
 from api.core.tables import *
-from sqlalchemy import Text
 
 
-class Stack(ImprobableDbModel, TextIdentified):
-    description = Column(Text())
+class Stack(TextIdentified, ImprobableDbModel, Description):
+    pass
 
 # Todo versions? major/minor? inheritance?
 # Requirements e.g. database, php other environments.

@@ -4,6 +4,7 @@ from api.settings import *
 from api.users.api import router as users
 from api.roles.api import router as roles
 from api.teams.api import router as teams
+from api.stacks.api import router as stacks
 from api.apps.api import router as apps
 from api.environments.api import router as environments
 from api.repositories.api import router as repositories
@@ -25,6 +26,7 @@ router.include_router(apps, prefix="/apps", tags=["Apps"])
 router.include_router(apps_instances, prefix="/apps", tags=["Apps"])
 router.include_router(instances, prefix="/instances", tags=["Apps"])
 router.include_router(environments, prefix="/environments", tags=["Apps"])
+router.include_router(stacks, prefix="/stacks", tags=["Stacks"])
 router.include_router(users, prefix="/users", tags=["Users and teams"])
 router.include_router(roles, prefix="/roles", tags=["Users and teams"])
 router.include_router(teams, prefix="/teams", tags=["Users and teams"])
