@@ -34,13 +34,13 @@ def delete_app(id: str):
     return delete(tables.App, id)
 
 
-@router.get("/{id}/{environment}", response_model=AppInstance)
+@router.get("/{id}/{environment}", response_model=Instance)
 def get_app_instance(id: str):
     app = get_or_error(tables.App, id)
     return app
 
 
-@router.put("/{id}/{environment}", response_model=AppInstance)
+@router.put("/{id}/{environment}", response_model=Instance)
 def update_app_instance(*, id: str, app_in: App):
     app = get_or_error(tables.App, id)
 
@@ -51,7 +51,7 @@ def update_app_instance(*, id: str, app_in: App):
         return app
 
 
-@router.delete("/{id}/{environment}", response_model=AppInstance)
+@router.delete("/{id}/{environment}", response_model=Instance)
 def delete_app(id: str):
     app = get_or_error(tables.App, id)
     return delete(app)
