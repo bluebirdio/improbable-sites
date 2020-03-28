@@ -5,6 +5,7 @@ from api.roles.tables import *
 from api.teams.tables import *
 from api.environments.tables import *
 from api.apps.tables import *
+from api.instances.tables import *
 from api.repositories.tables import *
 
 

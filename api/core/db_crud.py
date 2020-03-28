@@ -39,14 +39,14 @@ def query(model, order_by='name', **kwargs):
     return q.all()
 
 
-def get_or_error(model, item_id, detail='Item not found'):
-    item = db_get(model, item_id)
+def get_or_error(model, item_id, detail='Item not found', filter={}):
+    item = db_get(model, item_id, filter)
     if item is None:
         raise HTTPException(status_code=404, detail=detail)
     return item
 
 
-def db_get(model, item_id):
+def db_get(model, item_id, filter={}):
     with db():
         q = db.session.query(model)
 
@@ -60,6 +60,8 @@ def db_get(model, item_id):
             return None
         else:
             q = q.filter(model.uuid == item_uuid)
+    if filter is not None:
+        q = q.filter(filter)
 
     return q.one_or_none()
 
