@@ -95,9 +95,11 @@ def db_create(item):
 
 
 def update(model, item_id, data_in):
+    data = db_process_input(data_in)
     item = get_or_error(model, item_id)
-    for column, value in data_in.items():
+    for column, value in data.items():
         setattr(item, column, value)
+
     validate_update(model, item)
     db_update(item)
 
