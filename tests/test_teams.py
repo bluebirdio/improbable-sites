@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+
 from main import api
 
 client = TestClient(api)
@@ -11,17 +12,11 @@ def test_get_teams():
 
 def test_team_crud():
     # CREATE a team.
-    response = client.post(
-        "/teams/",
-        json={
-            "name": "Test Team",
-        }
-    )
+    response = client.post("/teams/", json={"name": "Test Team",})
     assert response.status_code == 200
 
     content = response.json()
-    assert content["name"] == "Test Team" \
-
+    assert content["name"] == "Test Team"
     team_id = content["id"]
     assert team_id != ""
 
@@ -46,13 +41,10 @@ def test_team_crud():
         json={
             "name": "Test Vendor",
             "url": "http://www.example.com/",
-            "phone": "6125551212"
-        }
+            "phone": "6125551212",
+        },
     )
 
     # DELETE the team.
-    response = client.delete(
-        "/teams/" + team_id
-    )
+    response = client.delete("/teams/" + team_id)
     assert response.status_code == 204
-
