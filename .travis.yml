@@ -16,7 +16,7 @@ services:
 # Install dependencies
 install:
   - pip install -r requirements.txt
-  - pip install -U requirements-test.txt
+  - pip install -r requirements-test.txt
 
 env:
   - DB=sqlite   DATABASE_URL=sqlite://
