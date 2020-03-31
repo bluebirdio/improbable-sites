@@ -9,12 +9,18 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/", response_model=List[Environment], response_description="Return a list of environments")
+@router.get(
+    "/",
+    response_model=List[Environment],
+    response_description="Return a list of environments",
+)
 def list_environments():
     return query(tables.Environment)
 
 
-@router.post("/", response_model=Environment, response_description="Create a new environment.")
+@router.post(
+    "/", response_model=Environment, response_description="Create a new environment."
+)
 def create_environment(env_in: Environment):
     return create(tables.Environment, env_in)
 
@@ -27,4 +33,3 @@ def get_environment(id: str):
 @router.delete("/{id}", response_model=Environment)
 def delete_environment(id: str):
     return delete(tables.Environment, id)
-

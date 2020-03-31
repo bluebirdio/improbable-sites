@@ -8,15 +8,16 @@ import re
 from uuid import uuid4
 import shortuuid
 
+
 class ImprobableBaseDbModel:
     @declared_attr
     def __tablename__(self):
         # Generate __tablename__ automatically by turning CamelCase class name to snake_case
-        snake = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', self.__name__)
-        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', snake).lower()
+        snake = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", self.__name__)
+        return re.sub("([a-z0-9])([A-Z])", r"\1_\2", snake).lower()
 
     pk = Column(Integer(), primary_key=True)
-    #uuid = Column(UUID(as_uuid=True), default=uuid4, nullable=False, index=True, unique=True)
+    # uuid = Column(UUID(as_uuid=True), default=uuid4, nullable=False, index=True, unique=True)
     # TODO uuid column is pgsql-specific revert w/ pgsql or find a longer-term solution.
     uuid = Column(UUIDType(), nullable=False, default=uuid4)
     name = Column(String(255), nullable=False)

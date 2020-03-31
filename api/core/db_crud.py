@@ -15,18 +15,18 @@ def db_process_input(data_in, target=None):
         target_data = {}
     for column, value in data.items():
         # Passing id in as the first value causes its setter to fire before there's a name field to utilize
-        if column is 'id' and value is None:
+        if column is "id" and value is None:
             continue
         elif column not in target_data.keys() or target_data[column] != value:
             processed[column] = value
 
     if bool(processed):
-        processed['changed'] = datetime.utcnow()
+        processed["changed"] = datetime.utcnow()
 
     return processed
 
 
-def query(model, order_by='name', **kwargs):
+def query(model, order_by="name", **kwargs):
     with db():
         q = db.session.query(model).order_by(order_by)
 
@@ -39,7 +39,7 @@ def query(model, order_by='name', **kwargs):
     return q.all()
 
 
-def get_or_error(model, item_id, detail='Item not found', filter={}):
+def get_or_error(model, item_id, detail="Item not found", filter={}):
     item = db_get(model, item_id, filter)
     if item is None:
         raise HTTPException(status_code=404, detail=detail)

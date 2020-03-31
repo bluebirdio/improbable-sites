@@ -5,9 +5,9 @@ import slugify
 
 
 class ImprobableBaseModel(BaseModel):
-    id: Optional[str] = Field(None,
-                               title='Automatically-generated unique identifier',
-                               readOnly=True)
+    id: Optional[str] = Field(
+        None, title="Automatically-generated unique identifier", readOnly=True
+    )
     name: constr(min_length=2, max_length=255, strip_whitespace=True) = ...
 
     class Config:
@@ -17,12 +17,12 @@ class ImprobableBaseModel(BaseModel):
 class ImprobableTextIdentified(ImprobableBaseModel):
     id: constr(min_length=2, max_length=255, strip_whitespace=True) = None
 
-    @validator('id', always=True)
+    @validator("id", always=True)
     def set_id(cls, v, values):
         if v is not None:
             return v
-        elif 'name' in values:
-            return v or slugify(values['name'])
+        elif "name" in values:
+            return v or slugify(values["name"])
 
 
 class ImprobableInternalAttributes(BaseModel):

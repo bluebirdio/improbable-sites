@@ -9,7 +9,9 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/", response_model=List[User], response_description="Return a list of users")
+@router.get(
+    "/", response_model=List[User], response_description="Return a list of users"
+)
 def list_users():
     return query(tables.User)
 

@@ -9,7 +9,9 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/", response_model=List[Stack], response_description="Return a list of stacks")
+@router.get(
+    "/", response_model=List[Stack], response_description="Return a list of stacks"
+)
 def list_stacks():
     return query(tables.Stack)
 

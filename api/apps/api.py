@@ -9,7 +9,9 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/", response_model=List[App], response_description="Return a list of applications")
+@router.get(
+    "/", response_model=List[App], response_description="Return a list of applications"
+)
 def list_apps():
     return query(tables.App)
 

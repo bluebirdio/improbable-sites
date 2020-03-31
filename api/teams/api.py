@@ -9,7 +9,9 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/", response_model=List[Team], response_description="Return a list of teams")
+@router.get(
+    "/", response_model=List[Team], response_description="Return a list of teams"
+)
 def list_teams():
     return query(tables.Team)
 
@@ -32,4 +34,3 @@ def update_team(*, id: str, team_in: Team):
 @router.delete("/{id}", response_model=Team)
 def delete_team(id: str):
     return delete(tables.Team, id)
-

@@ -9,7 +9,9 @@ from typing import List
 router = APIRouter()
 
 
-@router.get("/", response_model=List[Role], response_description="Return a list of roles")
+@router.get(
+    "/", response_model=List[Role], response_description="Return a list of roles"
+)
 def list_roles():
     return query(tables.Role)
 

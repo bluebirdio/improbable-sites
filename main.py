@@ -15,7 +15,7 @@ import uvicorn
 
 api = FastAPI()
 
-api.title = 'Sites API'
+api.title = "Sites API"
 api.openapi_url = "/v1/openapi.json"
 
 api.add_middleware(DBSessionMiddleware, db_url=DATABASE_URL)

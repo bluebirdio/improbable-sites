@@ -10,4 +10,3 @@ class TeamMember(ImprobableBaseModel):
 
 class Team(HasDescription, ImprobableTextIdentified):
     pass
-
