@@ -21,12 +21,12 @@ install:
 env:
   - DB=sqlite   DATABASE_URL=sqlite://
   - DB=mysql    DATABASE_URL=mysql://travis:@localhost/travis_test
-  - DB=postgres DATABASE_URL=postgresql://scott:tiger@localhost:5432/travis_test
+  - DB=postgres DATABASE_URL=postgresql://postgres:@localhost:5432/travis_test
 
 before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE IF NOT EXISTS travis_test;'; fi"
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'CREATE DATABASE travis_test;' -U postgres; fi"
-  - python api/migrate.py
+  - bash scripts/install.sh
 
 # Run tests
 script:
