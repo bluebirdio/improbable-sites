@@ -1,3 +1,5 @@
 black
 isort
 pytest
+sqlalchemy[mysql]
+sqlalchemy[postgresql]
