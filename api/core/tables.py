@@ -1,12 +1,13 @@
+import re
+from datetime import datetime
+from uuid import uuid4
+
+import shortuuid
+from slugify import slugify
 from sqlalchemy import Column, DateTime, Integer, String, Text
-from sqlalchemy_utils.types.uuid import UUIDType
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from sqlalchemy.ext.hybrid import hybrid_property
-from slugify import slugify
-from datetime import datetime
-import re
-from uuid import uuid4
-import shortuuid
+from sqlalchemy_utils.types.uuid import UUIDType
 
 
 class ImprobableBaseDbModel:

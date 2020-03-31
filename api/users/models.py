@@ -1,5 +1,6 @@
-from api.core.models import *
 from pydantic import EmailStr
+
+from api.core.models import *
 
 
 class User(ImprobableTextIdentified, ImprobableBaseModel):

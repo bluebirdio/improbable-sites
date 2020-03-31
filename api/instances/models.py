@@ -1,5 +1,6 @@
-from api.core.models import *
 from pydantic import AnyUrl
+
+from api.core.models import *
 
 
 class Instance(ImprobableBaseModel):

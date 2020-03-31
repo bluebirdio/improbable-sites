@@ -1,9 +1,11 @@
-from api.core.tables import TextIdentified
+from datetime import datetime
+
+import shortuuid
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi_sqlalchemy import db
-from datetime import datetime
-import shortuuid
+
+from api.core.tables import TextIdentified
 
 
 def db_process_input(data_in, target=None):

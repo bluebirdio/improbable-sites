@@ -1,7 +1,8 @@
-from pydantic import BaseModel, constr, UUID4, Field, validator
-from typing import Optional
 from datetime import datetime
+from typing import Optional
+
 import slugify
+from pydantic import UUID4, BaseModel, Field, constr, validator
 
 
 class ImprobableBaseModel(BaseModel):

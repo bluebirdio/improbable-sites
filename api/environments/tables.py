@@ -1,5 +1,7 @@
-from api.core.tables import *
 from sqlalchemy import Enum
+
+from api.core.tables import *
+
 from .values import ProductionLevel
 
 

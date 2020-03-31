@@ -1,10 +1,11 @@
+from typing import List
+
 from fastapi import APIRouter
 
-from .models import *
-from . import tables
-
 from api.core.db_crud import *
-from typing import List
+
+from . import tables
+from .models import *
 
 router = APIRouter()
 
