@@ -16,7 +16,7 @@ services:
 # Install dependencies
 install:
   - pip install -r requirements.txt
-  - pip install -U pytest
+  - pip install -U requirements-test.txt
 
 env:
   - DB=sqlite   DATABASE_URL=sqlite://
@@ -30,4 +30,5 @@ before_script:
 
 # Run tests
 script:
-  - pytest
+  - bash scripts/lint.sh
+  - bash scripts/test.sh
