@@ -119,11 +119,11 @@ def db_update(item):
 
 def delete(model, item_id):
     item = get_or_error(model, item_id)
-    db_delete(item)
+    db_delete(model, item.pk)
 
 
-def db_delete(item):
+def db_delete(model, pk):
     with db():
-        db.session.delete(item)
+        db.session.query(model).filter(model.pk == pk).delete()
         db.session.commit()
     return

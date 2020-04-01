@@ -17,7 +17,7 @@ def list_teams():
     return query(tables.Team)
 
 
-@router.post("/", response_model=Team, response_description="Create a new team.")
+@router.post("/", response_model=Team, status_code=201, response_description="Create a new team.")
 def create_team(team_in: Team):
     return create(tables.Team, team_in)
 
@@ -32,6 +32,6 @@ def update_team(*, id: str, team_in: Team):
     return update(tables.Team, id, team_in)
 
 
-@router.delete("/{id}", response_model=Team)
+@router.delete("/{id}", status_code=204)
 def delete_team(id: str):
-    return delete(tables.Team, id)
+    delete(tables.Team, id)

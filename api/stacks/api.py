@@ -32,6 +32,6 @@ def get_stack(id: str):
     return get_or_error(tables.Stack, id, "Stack not found")
 
 
-@router.delete("/{id}", response_model=Stack)
+@router.delete("/{id}", status_code=204)
 def delete_stack(id: str):
-    return delete(tables.Stack, id)
+    delete(tables.Stack, id)

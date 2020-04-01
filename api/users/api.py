@@ -17,7 +17,7 @@ def list_users():
     return query(tables.User)
 
 
-@router.post("/", response_model=User, response_description="Create a new user.")
+@router.post("/", response_model=User, status_code=201, response_description="Create a new user.")
 def create_user(user_in: User):
     return create(tables.User, user_in)
 
@@ -27,6 +27,6 @@ def get_user(id: str):
     return get_or_error(tables.User, id, "User not found")
 
 
-@router.delete("/{id}", response_model=User)
+@router.delete("/{id}", status_code=204)
 def delete_user(id: str):
-    return delete(tables.User, id)
+    delete(tables.User, id)

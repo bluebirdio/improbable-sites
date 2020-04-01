@@ -20,6 +20,7 @@ def list_app_instances(app_id: str):
 
 @router.post(
     "/{app_id}/instances",
+    status_code=201,
     response_model=Instance,
     response_description="Create a new instance.",
 )
@@ -39,7 +40,7 @@ def get_app_instance(app_id: str, id: str):
     )
 
 
-@router.delete("/{app_id}/instances/{id}", response_model=Instance)
+@router.delete("/{apo_id}/instances/{id}", status_code=204)
 def delete_app_instance(app_id: str, id: str):
     # Validate that the instance in this app namespace can be found
     if get_or_error(
@@ -48,4 +49,4 @@ def delete_app_instance(app_id: str, id: str):
         filter={"app_id": app_id},
         detail="Not an available instance.",
     ):
-        return delete(tables.Instance, id)
+        delete(tables.Instance, id)

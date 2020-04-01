@@ -20,7 +20,7 @@ def list_repositories():
 
 
 @router.post(
-    "/", response_model=Repository, response_description="Create a new repository."
+    "/", response_model=Repository, status_code=201, response_description="Create a new repository."
 )
 def create_repository(repo_in: Repository):
     return create(tables.Repository, repo_in)
@@ -31,6 +31,6 @@ def get_repository(id: str):
     return get_or_error(tables.Repository, id)
 
 
-@router.delete("/{id}", response_model=Repository)
+@router.delete("/{id}", status_code=204)
 def delete_repository(id: str):
-    return delete(tables.Repository, id)
+    delete(tables.Repository, id)

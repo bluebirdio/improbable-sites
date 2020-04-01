@@ -17,7 +17,7 @@ def list_roles():
     return query(tables.Role)
 
 
-@router.post("/", response_model=Role, response_description="Create a new role.")
+@router.post("/", response_model=Role, status_code=201, response_description="Create a new role.")
 def create_role(role_in: Role):
     return create(tables.Role, role_in)
 
@@ -27,6 +27,6 @@ def get_role(id: str):
     return get_or_error(tables.Role, id, "Role not found")
 
 
-@router.delete("/{id}", response_model=Role)
+@router.delete("/{id}", status_code=204)
 def delete_role(id: str):
-    return delete(tables.Role, id)
+    delete(tables.Role, id)

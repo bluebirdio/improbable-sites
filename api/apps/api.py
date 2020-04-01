@@ -17,7 +17,7 @@ def list_apps():
     return query(tables.App)
 
 
-@router.post("/", response_model=App, response_description="Create a new app.")
+@router.post("/", response_model=App, status_code=201, response_description="Create a new app.")
 def create_app(app_in: App):
     return create(tables.App, app_in)
 
@@ -32,9 +32,9 @@ def update_app(*, id: str, app_in: App):
     return update(tables.App, id, app_in)
 
 
-@router.delete("/{id}", response_model=App)
+@router.delete("/{id}", status_code=204)
 def delete_app(id: str):
-    return delete(tables.App, id)
+    delete(tables.App, id)
 
 
 @router.get("/{id}/{environment}", response_model=Instance)
@@ -54,7 +54,7 @@ def update_app_instance(*, id: str, app_in: App):
         return app
 
 
-@router.delete("/{id}/{environment}", response_model=Instance)
+@router.delete("/{id}/{environment}", status_code=204)
 def delete_app(id: str):
     app = get_or_error(tables.App, id)
-    return delete(app)
+    delete(app)

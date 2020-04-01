@@ -20,7 +20,7 @@ def list_environments():
 
 
 @router.post(
-    "/", response_model=Environment, response_description="Create a new environment."
+    "/", response_model=Environment, status_code=201, response_description="Create a new environment."
 )
 def create_environment(env_in: Environment):
     return create(tables.Environment, env_in)
@@ -31,6 +31,6 @@ def get_environment(id: str):
     return get_or_error(tables.Environment, id, "Not an available environment.")
 
 
-@router.delete("/{id}", response_model=Environment)
+@router.delete("/{id}", status_code=204)
 def delete_environment(id: str):
-    return delete(tables.Environment, id)
+    delete(tables.Environment, id)
