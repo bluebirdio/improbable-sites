@@ -30,7 +30,7 @@ def get_team(id: str):
 
 
 @router.put("/{id}", response_model=Team)
-def update_team(*, id: str, team_in: Team):
+def update_team(id: str, team_in: Team):
     return update(tables.Team, id, team_in)
 
 
