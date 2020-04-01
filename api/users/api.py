@@ -17,7 +17,9 @@ def list_users():
     return query(tables.User)
 
 
-@router.post("/", response_model=User, status_code=201, response_description="Create a new user.")
+@router.post(
+    "/", response_model=User, status_code=201, response_description="Create a new user."
+)
 def create_user(user_in: User):
     return create(tables.User, user_in)
 

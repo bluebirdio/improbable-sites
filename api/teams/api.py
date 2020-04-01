@@ -17,7 +17,9 @@ def list_teams():
     return query(tables.Team)
 
 
-@router.post("/", response_model=Team, status_code=201, response_description="Create a new team.")
+@router.post(
+    "/", response_model=Team, status_code=201, response_description="Create a new team."
+)
 def create_team(team_in: Team):
     return create(tables.Team, team_in)
 

@@ -20,7 +20,10 @@ def list_environments():
 
 
 @router.post(
-    "/", response_model=Environment, status_code=201, response_description="Create a new environment."
+    "/",
+    response_model=Environment,
+    status_code=201,
+    response_description="Create a new environment.",
 )
 def create_environment(env_in: Environment):
     return create(tables.Environment, env_in)

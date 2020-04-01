@@ -20,7 +20,10 @@ def list_repositories():
 
 
 @router.post(
-    "/", response_model=Repository, status_code=201, response_description="Create a new repository."
+    "/",
+    response_model=Repository,
+    status_code=201,
+    response_description="Create a new repository.",
 )
 def create_repository(repo_in: Repository):
     return create(tables.Repository, repo_in)

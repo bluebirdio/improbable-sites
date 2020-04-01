@@ -21,7 +21,7 @@ def test_teams_get():
 def test_teams_crud():
     # CREATE a team.
     response = client.post(path(), json={"name": "Test Team",})
-    assert response.status_code == 200
+    assert response.status_code == 201
 
     content = response.json()
     assert content["name"] == "Test Team"

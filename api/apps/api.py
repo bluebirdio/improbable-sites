@@ -17,7 +17,9 @@ def list_apps():
     return query(tables.App)
 
 
-@router.post("/", response_model=App, status_code=201, response_description="Create a new app.")
+@router.post(
+    "/", response_model=App, status_code=201, response_description="Create a new app."
+)
 def create_app(app_in: App):
     return create(tables.App, app_in)
 

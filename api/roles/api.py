@@ -17,7 +17,9 @@ def list_roles():
     return query(tables.Role)
 
 
-@router.post("/", response_model=Role, status_code=201, response_description="Create a new role.")
+@router.post(
+    "/", response_model=Role, status_code=201, response_description="Create a new role."
+)
 def create_role(role_in: Role):
     return create(tables.Role, role_in)
 
