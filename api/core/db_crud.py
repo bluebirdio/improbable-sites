@@ -42,30 +42,36 @@ def query(model, order_by="name", **kwargs):
 
 
 def get_or_error(model, item_id, detail="Item not found", query_filter=None):
-    item = db_get(model, item_id, query_filter)
-    if item is None:
-        raise HTTPException(status_code=404, detail=detail)
-    return item
+    with db():
+        item = db_get(model, item_id, query_filter)
+        if item is None:
+            raise HTTPException(status_code=404, detail=detail)
+        return item
 
 
 def db_get(model, item_id, query_filter=None):
     with db():
         q = db.session.query(model)
 
-    if item_id is int:
-        q = q.filter(model.pk == item_id)
-    elif issubclass(model, TextIdentified):
-        q = q.filter(model._id == item_id)
-    else:
-        item_uuid = shortuuid.decode(item_id)
-        if item_uuid.version is None:
-            return None
+        if item_id is int:
+            q = q.filter(model.pk == item_id)
+        elif issubclass(model, TextIdentified):
+            q = q.filter(model._id == item_id)
         else:
-            q = q.filter(model.uuid == item_uuid)
-    if query_filter is not None:
-        q = q.filter(query_filter)
+            item_uuid = shortuuid.decode(item_id)
+            if item_uuid.version is None:
+                return None
+            else:
+                q = q.filter(model.uuid == item_uuid)
+        if query_filter is not None:
+            q = q.filter(query_filter)
 
-    return q.one_or_none()
+        item = q.one_or_none()
+
+        # Detach from the db session to support threading. Must use session.add() before running ORM operations.
+        if item is not None:
+            db.session.expunge(item)
+        return item
 
 
 def get_by_name(model, item_name):
@@ -98,23 +104,25 @@ def db_create(item):
 
 def update(model, item_id, data_in):
     data = db_process_input(data_in)
-    item = get_or_error(model, item_id)
-    for column, value in data.items():
-        setattr(item, column, value)
+    if id in data:
+        if data["id"] != item_id:
+            raise HTTPException(status_code=422, detail="Can not change ID.")
 
-    validate_update(model, item)
-    db_update(item)
+    with db():
+        item = get_or_error(model, item_id)
+        for column, value in data.items():
+            setattr(item, column, value)
+
+        validate_update(model, item)
+
+        db.session.add(item)
+        db.session.commit()
+        db.session.refresh(item)
+        return item
 
 
 def validate_update(model, item):
     pass
-
-
-def db_update(item):
-    with db():
-        db.session.commit()
-        db.session.refresh(item)
-    return item
 
 
 def delete(model, item_id):
