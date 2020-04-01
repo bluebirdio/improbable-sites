@@ -25,7 +25,7 @@ install:
   - pip install -r requirements-test.txt
 
 env:
-  - DB=sqlite   DATABASE_URL=sqlite://
+  - DB=sqlite   DATABASE_URL=sqlite:///:memory:
   - DB=mysql    DATABASE_URL=mysql://travis:@localhost/travis_test
   - DB=postgres DATABASE_URL=postgresql://postgres:@localhost:5432/travis_test
 
