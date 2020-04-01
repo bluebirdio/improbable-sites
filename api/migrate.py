@@ -10,9 +10,7 @@ from api.stacks.tables import *
 from api.teams.tables import *
 from api.users.tables import *
 
-engine = sqlalchemy.create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
-)
+engine = sqlalchemy.create_engine( DATABASE_URL )
 
 
 def main():
