@@ -4,6 +4,7 @@ from main import api
 
 client = TestClient(api)
 
+
 def path(action=None):
     prefix = "/v1/teams/"
     if action is not None:
