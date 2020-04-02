@@ -17,7 +17,7 @@ def test_stacks_get():
 
 def test_stacks_crud():
     # CREATE a stack.
-    response = client.post(path(), json={"name": "Test Python",})
+    response = client.post(path(), json={"name": "Test Python"})
     assert response.status_code == 201
 
     content = response.json()
@@ -26,7 +26,7 @@ def test_stacks_crud():
     assert stack_id != ""
 
     # CREATE duplicate stack: should fail with 422.
-    response = client.post(path(), json={"id": stack_id, "name": "Test Python",})
+    response = client.post(path(), json={"id": stack_id, "name": "Test Python"})
     assert response.status_code == 422
 
     # GET the new stack.
@@ -45,7 +45,32 @@ def test_stacks_crud():
     content = response.json()
     assert content["description"] == "DESC"
 
-    # DELETE the stack.
+    # CREATE derivative stack with incorrect stack id.
+    response = client.post(
+        path(), json={"parent_stack_id": "invalid", "name": "Test FastAPI"}
+    )
+    assert response.status_code == 422
+
+    # CREATE derivative stack with correct stack id.
+    response = client.post(
+        path(), json={"parent_stack_id": stack_id, "name": "Test FastAPI"}
+    )
+    assert response.status_code == 201
+    child_stack_id = content["id"]
+    assert child_stack_id != ""
+
+    # DELETE the original stack: should fail because it has a derivative.
+    response = client.delete(path(stack_id))
+    assert response.status_code == 422
+
+    # DELETE the derivative first
+    response = client.delete(path(child_stack_id))
+    assert response.status_code == 204
+
+    response = client.get(path(child_stack_id))
+    assert response.status_code == 404
+
+    # DELETE the original now that it has no dependency
     response = client.delete(path(stack_id))
     assert response.status_code == 204
 
