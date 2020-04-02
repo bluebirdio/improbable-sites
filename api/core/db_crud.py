@@ -4,8 +4,10 @@ import shortuuid
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi_sqlalchemy import db
+from sqlalchemy.exc import IntegrityError
 
 from api.core.tables import TextIdentified
+from api.settings import DATABASE_URL
 
 
 def db_process_input(data_in, target=None):
@@ -130,6 +132,10 @@ def update(model, item_id, data_in):
             raise HTTPException(status_code=422, detail="Can not change ID.")
 
     with db():
+        # Enforce referential integrity for Sqlite
+        if DATABASE_URL[:6] == "sqlite":
+            db.session.execute("PRAGMA foreign_keys = ON")
+
         item = get_or_error(model, item_id)
         for column, value in data.items():
             setattr(item, column, value)
@@ -137,7 +143,14 @@ def update(model, item_id, data_in):
         validate_update(model, item)
 
         db.session.add(item)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except IntegrityError:
+            raise HTTPException(
+                status_code=422,
+                detail="This update would break references. Not performing.",
+            )
+
         db.session.refresh(item)
         return item
 
@@ -153,6 +166,14 @@ def delete(model, item_id):
 
 def db_delete(model, pk):
     with db():
-        db.session.query(model).filter(model.pk == pk).delete()
-        db.session.commit()
-    return
+        # Enforce referential integrity for Sqlite
+        if DATABASE_URL[:6] == "sqlite":
+            db.session.execute("PRAGMA foreign_keys = ON")
+        try:
+            db.session.query(model).filter(model.pk == pk).delete()
+            db.session.commit()
+        except IntegrityError:
+            raise HTTPException(
+                status_code=422,
+                detail="Can't delete this item because it is still being referenced.",
+            )
