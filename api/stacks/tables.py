@@ -1,8 +1,12 @@
+from sqlalchemy import ForeignKey
+
 from api.core.tables import *
 
 
 class Stack(TextIdentified, ImprobableDbModel, Description):
-    pass
+    parent_stack_id = Column(
+        ForeignKey("stack._id", ondelete="RESTRICT"), nullable=True
+    )
 
 
 # Todo versions? major/minor? inheritance?
