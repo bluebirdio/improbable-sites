@@ -1,8 +1,4 @@
-from fastapi.testclient import TestClient
-
-from main import api
-
-client = TestClient(api)
+from .client import client
 
 
 def path(action=""):
