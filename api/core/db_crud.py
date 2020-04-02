@@ -49,22 +49,43 @@ def get_or_error(model, item_id, detail="Item not found", query_filter=None):
         return item
 
 
+def exists_or_error(model, item_id, detail="Item not found", query_filter=None):
+    if not exists(model, item_id, query_filter):
+        raise HTTPException(status_code=404, detail=detail)
+    else:
+        return True
+
+
+def item_query(q, model, item_id, query_filter=None):
+    if item_id is int:
+        q = q.filter(model.pk == item_id)
+    elif issubclass(model, TextIdentified):
+        q = q.filter(model._id == item_id)
+    else:
+        item_uuid = shortuuid.decode(item_id)
+        if item_uuid.version is None:
+            return None
+        else:
+            q = q.filter(model.uuid == item_uuid)
+
+    if query_filter is not None:
+        q = q.filter(query_filter)
+
+    return q
+
+
+def exists(model, item_id, query_filter=None):
+    with db():
+        q = db.session.query(model)
+        q = item_query(q, model, item_id, query_filter)
+
+        return db.session.query(q.exists()).scalar()
+
+
 def db_get(model, item_id, query_filter=None):
     with db():
         q = db.session.query(model)
-
-        if item_id is int:
-            q = q.filter(model.pk == item_id)
-        elif issubclass(model, TextIdentified):
-            q = q.filter(model._id == item_id)
-        else:
-            item_uuid = shortuuid.decode(item_id)
-            if item_uuid.version is None:
-                return None
-            else:
-                q = q.filter(model.uuid == item_uuid)
-        if query_filter is not None:
-            q = q.filter(query_filter)
+        q = item_query(q, model, item_id, query_filter)
 
         item = q.one_or_none()
 

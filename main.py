@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter
-from fastapi_sqlalchemy import DBSessionMiddleware
+from fastapi_sqlalchemy import DBSessionMiddleware, db
 from sqlalchemy import create_engine
 from api.settings import *
 from api.users.api import router as users
@@ -21,6 +21,7 @@ api.openapi_url = "/v1/openapi.json"
 
 db_engine = create_engine(DATABASE_URL, connect_args=DATABASE_ARGS)
 api.add_middleware(DBSessionMiddleware, custom_engine=db_engine)
+
 
 # Allow each module to define its own routes separately and include them here with namespaces.
 router = APIRouter()
