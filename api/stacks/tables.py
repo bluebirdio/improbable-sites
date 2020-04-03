@@ -5,7 +5,10 @@ from api.core.tables import *
 
 class Stack(TextIdentified, ImprobableDbModel, Description):
     parent_stack_id = Column(
-        ForeignKey("stack._id", onupdate="CASCADE", ondelete="RESTRICT", use_alter=True), nullable=True
+        ForeignKey(
+            "stack._id", onupdate="CASCADE", ondelete="RESTRICT", use_alter=True
+        ),
+        nullable=True,
     )
 
 

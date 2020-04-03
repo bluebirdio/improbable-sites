@@ -1,18 +1,18 @@
-from fastapi import FastAPI, APIRouter
+import uvicorn
+from fastapi import APIRouter, FastAPI
 from fastapi_sqlalchemy import DBSessionMiddleware, db
 from sqlalchemy import create_engine
-from api.settings import *
-from api.users.api import router as users
-from api.roles.api import router as roles
-from api.teams.api import router as teams
-from api.stacks.api import router as stacks
-from api.apps.api import router as apps
-from api.environments.api import router as environments
-from api.repositories.api import router as repositories
-from api.instances.api import router as instances
-from api.apps_instances.api import router as apps_instances
-import uvicorn
 
+from api.apps.api import router as apps
+from api.apps_instances.api import router as apps_instances
+from api.environments.api import router as environments
+from api.instances.api import router as instances
+from api.repositories.api import router as repositories
+from api.roles.api import router as roles
+from api.settings import *
+from api.stacks.api import router as stacks
+from api.teams.api import router as teams
+from api.users.api import router as users
 
 api = FastAPI()
 
