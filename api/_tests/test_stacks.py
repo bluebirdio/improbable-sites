@@ -52,7 +52,7 @@ def test_stacks_crud():
         path(), json={"parent_stack_id": stack_id, "name": "Test FastAPI"}
     )
     assert response.status_code == 201
-    child_stack_id = content["id"]
+    child_stack_id = response.json()["id"]
     assert child_stack_id != ""
 
     # DELETE the original stack: should fail because it has a derivative.
