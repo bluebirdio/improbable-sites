@@ -19,7 +19,7 @@ def db_process_input(data_in, target=None):
         target_data = {}
     for column, value in data.items():
         # Passing id in as the first value causes its setter to fire before there's a name field to utilize
-        if column is "id" and value is None:
+        if column == "id" and value is None:
             continue
         elif column not in target_data.keys() or target_data[column] != value:
             processed[column] = value
