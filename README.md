@@ -1,7 +1,9 @@
+#Application hosting management API
+Maintains a listing of managed sites and the resources they depend on.
+
 [![Build Status](https://travis-ci.com/bluebirdio/improbable-sites.svg?branch=master)](https://travis-ci.com/bluebirdio/improbable-sites)
 [![Coverage](https://img.shields.io/codecov/c/github/bluebirdio/improbable-sites)](https://codecov.io/gh/bluebirdio/improbable-sites)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
-Maintains a listing of managed sites and the resources they depend on.
 
 Requires a Python 3.7 environment. Dependencies can be installed via:
 
@@ -12,7 +14,7 @@ database tables can be set up by running `api/migrate.py`
 
 The application can be started with e.g. `uvicorn main:api --host 0.0.0.0 --port 8000`
 
-Once it's running, th documentation for the API will be available at the following URLs:
+Once it's running, the documentation for the API will be available at the following URLs:
 
 * http://0.0.0.0:8000/docs (Swagger UI)
 * http://0.0.0.0:8000/redoc (ReDoc)
