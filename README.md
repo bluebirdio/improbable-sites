@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/bluebirdio/improbable-sites.svg?branch=master)](https://travis-ci.com/bluebirdio/improbable-sites)
+[![Coverage](https://img.shields.io/codecov/c/github/bluebirdio/improbable-sites)](https://codecov.io/gh/bluebirdio/improbable-sites)
+
 Maintains a listing of managed sites and the resources they depend on.
 
 Requires a Python 3.7 environment. Dependencies can be installed via:
