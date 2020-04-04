@@ -1,4 +1,4 @@
-#Application hosting management API
+# Application hosting management API
 Maintains a listing of managed sites and the resources they depend on.
 
 [![Build Status](https://travis-ci.com/bluebirdio/improbable-sites.svg?branch=master)](https://travis-ci.com/bluebirdio/improbable-sites)
