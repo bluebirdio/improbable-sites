@@ -1,11 +1,12 @@
 import pytest
 from fastapi.testclient import TestClient
-from main import api
-from api.migrate import *
 
-from .test_teams import test_team
+from api.migrate import *
+from main import api
+
 from .test_apps import test_app
 from .test_environments import test_environments
+from .test_teams import test_team
 
 
 @pytest.fixture(scope="session")
@@ -21,5 +22,3 @@ def test_db():
     yield
 
     drop_all()
-
-
