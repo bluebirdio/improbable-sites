@@ -2,6 +2,7 @@ from sqlalchemy import Boolean, Enum, ForeignKey
 
 from api.core.tables import *
 from api.repositories.values import RepositoryTargetType
+
 from .values import ProductionLevel
 
 
