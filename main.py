@@ -35,5 +35,17 @@ router.include_router(repositories, prefix="/repositories", tags=["Repositories"
 
 api.include_router(router, prefix="/v1")
 
+
+@api.get("/", response_model=list)
+async def root():
+    return [
+        {
+            "version": "1.0",
+            "name": "Original version",
+            "url": "/v1"
+        }
+    ]
+
+
 if __name__ == "__main__":
     uvicorn.run(api, host=LISTEN_HOST, port=LISTEN_PORT)
