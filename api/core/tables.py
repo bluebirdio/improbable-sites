@@ -17,7 +17,9 @@ class ImprobableBaseDbModel:
         snake = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", self.__name__)
         return re.sub("([a-z0-9])([A-Z])", r"\1_\2", snake).lower()
 
-    __table_args__ = {"mysql_engine": "InnoDB"}
+    @declared_attr
+    def __table_args__(self):
+        return {"mysql_engine": "InnoDB"}
 
     pk = Column(Integer(), primary_key=True)
     # uuid = Column(UUID(as_uuid=True), default=uuid4, nullable=False, index=True, unique=True)
