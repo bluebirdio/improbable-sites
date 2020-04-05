@@ -13,8 +13,12 @@ from api.users.tables import *
 engine = sqlalchemy.create_engine(DATABASE_URL)
 
 
-def main():
+def create_all():
     ImprobableDbModel.metadata.create_all(engine)
 
 
-main()
+def drop_all():
+    ImprobableDbModel.metadata.drop_all(engine)
+
+
+create_all()
