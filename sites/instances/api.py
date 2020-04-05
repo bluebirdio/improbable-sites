@@ -2,8 +2,8 @@ from typing import List
 
 from fastapi import APIRouter
 
-from sites.applications.tables import Application
 from samey.table_crud import *
+from sites.applications.tables import Application
 
 from .models import *
 

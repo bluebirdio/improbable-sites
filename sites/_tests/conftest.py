@@ -1,8 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from sites.migrate import *
 from main import api
+from sites.migrate import *
 
 from .test_applications import test_application
 from .test_teams import test_team

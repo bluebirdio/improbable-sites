@@ -1,5 +1,5 @@
-from samey.table_crud import exists
 from samey.models import *
+from samey.table_crud import exists
 
 from . import tables
 

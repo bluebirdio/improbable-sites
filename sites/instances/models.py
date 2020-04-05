@@ -1,7 +1,7 @@
 from pydantic import AnyUrl
 
-from samey.table_crud import exists
 from samey.models import *
+from samey.table_crud import exists
 from sites.repositories.values import RepositoryTargetType
 from sites.stacks import tables as stack_tables
 
