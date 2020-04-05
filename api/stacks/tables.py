@@ -3,7 +3,7 @@ from sqlalchemy import ForeignKey
 from samey.tables import *
 
 
-class Stack(TextIdentified, ImprobableTable, Description):
+class Stack(TextIdentified, SameyTable, HasDescription):
     parent_stack_id = Column(
         ForeignKey(
             "stack.id",

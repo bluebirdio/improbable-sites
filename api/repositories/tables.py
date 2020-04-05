@@ -6,11 +6,11 @@ from samey.tables import *
 from .values import RepositoryTargetType
 
 
-class Repository(TextIdentified, ImprobableTable, Description):
+class Repository(TextIdentified, SameyTable, HasDescription):
     url = Column(String(255))
 
 
-class RepositoryTarget(ImprobableTable):
+class RepositoryTarget(SameyTable):
     repository_pk = Column(
         ForeignKey("repository.pk", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,

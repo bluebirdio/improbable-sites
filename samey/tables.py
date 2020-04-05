@@ -9,7 +9,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_utils.types.uuid import UUIDType
 
 
-class ImprobableBaseDbTable:
+class SameyBaseDBTable:
     @declared_attr
     def __tablename__(self):
         # Generate __tablename__ automatically by turning CamelCase class name to snake_case
@@ -44,12 +44,12 @@ class ImprobableBaseDbTable:
         return self.name
 
 
-ImprobableTable = declarative_base(cls=ImprobableBaseDbTable)
+SameyTable = declarative_base(cls=SameyBaseDBTable)
 
 
 class TextIdentified:
     id = Column(String(255), nullable=False, index=True, unique=True)
 
 
-class Description(object):
+class HasDescription(object):
     description = Column(Text())

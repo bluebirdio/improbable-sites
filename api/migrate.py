@@ -13,11 +13,11 @@ engine = sqlalchemy.create_engine(DATABASE_URL)
 
 
 def create_all():
-    ImprobableTable.metadata.create_all(engine)
+    SameyTable.metadata.create_all(engine)
 
 
 def drop_all():
-    ImprobableTable.metadata.drop_all(engine)
+    SameyTable.metadata.drop_all(engine)
 
 
 create_all()

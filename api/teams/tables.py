@@ -3,11 +3,11 @@ from sqlalchemy import ForeignKey
 from samey.tables import *
 
 
-class Team(TextIdentified, ImprobableTable, Description):
+class Team(TextIdentified, SameyTable, HasDescription):
     pass
 
 
-class TeamMember(ImprobableTable):
+class TeamMember(SameyTable):
     team_id = Column(
         ForeignKey("team.id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
     )

@@ -1,5 +1,5 @@
 from samey.models import *
 
 
-class Role(HasDescription, ImprobableTextIdentified):
+class Role(HasDescription, SameyTextIdentified):
     pass

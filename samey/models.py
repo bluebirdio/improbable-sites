@@ -5,7 +5,7 @@ from pydantic import UUID4, BaseModel, Field, constr, root_validator, validator
 from slugify import slugify
 
 
-class ImprobableModel(BaseModel):
+class SameyModel(BaseModel):
     id: Optional[str] = Field(
         None, title="Automatically-generated unique identifier", readOnly=True
     )
@@ -15,7 +15,7 @@ class ImprobableModel(BaseModel):
         orm_mode = True
 
 
-class ImprobableTextIdentified(ImprobableModel):
+class SameyTextIdentified(SameyModel):
     id: constr(min_length=2, max_length=255, strip_whitespace=True) = None
 
     @root_validator
@@ -28,7 +28,7 @@ class ImprobableTextIdentified(ImprobableModel):
         return values
 
 
-class ImprobableInternalAttributes(BaseModel):
+class SameyProperties(BaseModel):
     uuid: UUID4
     created: datetime = datetime.utcnow()
     changed: datetime = None

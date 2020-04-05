@@ -1,7 +1,7 @@
 from samey.models import *
 
 
-class Application(HasDescription, ImprobableTextIdentified):
+class Application(HasDescription, SameyTextIdentified):
     team_id: str = ...
 
 
