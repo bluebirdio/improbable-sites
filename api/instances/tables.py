@@ -9,7 +9,8 @@ from .values import ProductionLevel
 class InstanceGroup(TextIdentified, ImprobableDbModel):
     default = Column(Boolean, default=False)
     application_id = Column(
-        ForeignKey("application._id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
+        ForeignKey("application._id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
     )
     stack_id = Column(
         ForeignKey("stack._id", onupdate="CASCADE", ondelete="RESTRICT"), nullable=False
@@ -23,7 +24,8 @@ class InstanceGroup(TextIdentified, ImprobableDbModel):
 class Instance(ImprobableDbModel):
     url = Column(String(255))
     application_id = Column(
-        ForeignKey("application._id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
+        ForeignKey("application._id", onupdate="CASCADE", ondelete="CASCADE"),
+        nullable=False,
     )
     stack_id = Column(
         ForeignKey("stack._id", onupdate="CASCADE", ondelete="RESTRICT"), nullable=False

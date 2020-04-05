@@ -11,14 +11,19 @@ router = APIRouter()
 
 
 @router.get(
-    "/", response_model=List[Application], response_description="Return a list of applications"
+    "/",
+    response_model=List[Application],
+    response_description="Return a list of applications",
 )
 def list_applications():
     return query(tables.Application)
 
 
 @router.post(
-    "/", response_model=Application, status_code=201, response_description="Create a new app."
+    "/",
+    response_model=Application,
+    status_code=201,
+    response_description="Create a new app.",
 )
 def create_application(app_in: Application):
     return create(tables.Application, app_in)
