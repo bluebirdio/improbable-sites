@@ -5,7 +5,6 @@ from api.migrate import *
 from main import api
 
 from .test_apps import test_app
-from .test_environments import test_environments
 from .test_teams import test_team
 
 
