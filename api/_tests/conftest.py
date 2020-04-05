@@ -19,5 +19,3 @@ def test_db():
     create_all()
 
     yield
-
-    drop_all()
