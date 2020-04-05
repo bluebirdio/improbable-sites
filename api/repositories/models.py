@@ -5,11 +5,11 @@ from api.core.models import *
 from .values import RepositoryTargetType
 
 
-class Repository(HasDescription, ImprobableBaseModel):
+class Repository(HasDescription, ImprobableModel):
     url: AnyUrl = None
 
 
-class RepositoryTarget(ImprobableBaseModel):
+class RepositoryTarget(ImprobableModel):
     repository: Repository = ...
     target_type: RepositoryTargetType = ...
     path: AnyUrl = None

@@ -6,7 +6,7 @@ from api.repositories.values import RepositoryTargetType
 from .values import ProductionLevel
 
 
-class InstanceGroup(ImprobableDbModel):
+class InstanceGroup(ImprobableTable):
     default = Column(Boolean, default=False)
     application_id = Column(
         ForeignKey("application.id", onupdate="CASCADE", ondelete="CASCADE"),
@@ -25,7 +25,7 @@ class InstanceGroup(ImprobableDbModel):
     )
 
 
-class Instance(ImprobableDbModel):
+class Instance(ImprobableTable):
     url = Column(String(255))
     application_id = Column(
         ForeignKey("application.id", onupdate="CASCADE", ondelete="CASCADE"),

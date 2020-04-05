@@ -5,7 +5,7 @@ from slugify import slugify
 from pydantic import UUID4, BaseModel, Field, constr, root_validator, validator
 
 
-class ImprobableBaseModel(BaseModel):
+class ImprobableModel(BaseModel):
     id: Optional[str] = Field(
         None, title="Automatically-generated unique identifier", readOnly=True
     )
@@ -15,7 +15,7 @@ class ImprobableBaseModel(BaseModel):
         orm_mode = True
 
 
-class ImprobableTextIdentified(ImprobableBaseModel):
+class ImprobableTextIdentified(ImprobableModel):
     id: constr(min_length=2, max_length=255, strip_whitespace=True) = None
 
     @root_validator

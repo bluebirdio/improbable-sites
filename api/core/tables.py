@@ -3,14 +3,13 @@ from datetime import datetime
 from uuid import uuid4
 
 import shortuuid
-from slugify import slugify
 from sqlalchemy import Column, DateTime, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy_utils.types.uuid import UUIDType
 
 
-class ImprobableBaseDbModel:
+class ImprobableBaseDbTable:
     @declared_attr
     def __tablename__(self):
         # Generate __tablename__ automatically by turning CamelCase class name to snake_case
@@ -45,7 +44,7 @@ class ImprobableBaseDbModel:
         return self.name
 
 
-ImprobableDbModel = declarative_base(cls=ImprobableBaseDbModel)
+ImprobableTable = declarative_base(cls=ImprobableBaseDbTable)
 
 
 class TextIdentified:

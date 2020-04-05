@@ -3,7 +3,7 @@ from sqlalchemy import ForeignKey
 from api.core.tables import *
 
 
-class Stack(TextIdentified, ImprobableDbModel, Description):
+class Stack(TextIdentified, ImprobableTable, Description):
     parent_stack_id = Column(
         ForeignKey(
             "stack.id",

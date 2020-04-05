@@ -3,11 +3,11 @@ from sqlalchemy import ForeignKey
 from api.core.tables import *
 
 
-class Team(TextIdentified, ImprobableDbModel, Description):
+class Team(TextIdentified, ImprobableTable, Description):
     pass
 
 
-class TeamMember(ImprobableDbModel):
+class TeamMember(ImprobableTable):
     team_id = Column(
         ForeignKey("team.id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
     )

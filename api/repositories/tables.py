@@ -6,11 +6,11 @@ from api.core.tables import *
 from .values import RepositoryTargetType
 
 
-class Repository(TextIdentified, ImprobableDbModel, Description):
+class Repository(TextIdentified, ImprobableTable, Description):
     url = Column(String(255))
 
 
-class RepositoryTarget(ImprobableDbModel):
+class RepositoryTarget(ImprobableTable):
     repository_pk = Column(
         ForeignKey("repository.pk", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
