@@ -3,6 +3,7 @@ from typing import List
 from fastapi import APIRouter
 
 from api.core.db_crud import *
+from api.instances.api import applications_router
 
 from . import tables
 from .models import *
@@ -42,3 +43,6 @@ def update_application(*, id: str, app_in: Application):
 @router.delete("/{id}", status_code=204)
 def delete_application(id: str):
     delete(tables.Application, id)
+
+
+router.include_router(applications_router, prefix="/{id}/instances")

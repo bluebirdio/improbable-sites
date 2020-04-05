@@ -3,8 +3,7 @@ from fastapi import APIRouter, FastAPI
 from fastapi_sqlalchemy import DBSessionMiddleware, db
 from sqlalchemy import create_engine
 
-from api.applications.api import router as apps
-from api.apps_instances.api import router as apps_instances
+from api.applications.api import router as applications
 from api.instances.api import router as instances
 from api.repositories.api import router as repositories
 from api.roles.api import router as roles
@@ -24,8 +23,7 @@ api.add_middleware(DBSessionMiddleware, custom_engine=db_engine)
 
 # Allow each module to define its own routes separately and include them here with namespaces.
 router = APIRouter()
-router.include_router(apps, prefix="/applications", tags=["Applications"])
-router.include_router(apps_instances, prefix="/applications", tags=["Applications"])
+router.include_router(applications, prefix="/applications", tags=["Applications"])
 router.include_router(instances, prefix="/instances", tags=["Applications"])
 router.include_router(stacks, prefix="/stacks", tags=["Stacks"])
 router.include_router(users, prefix="/users", tags=["Users and teams"])
