@@ -127,8 +127,6 @@ def update(model, item_id, data_in):
                 setattr(item, "changed", datetime.utcnow())
                 setattr(item, column, value)
 
-        validate_update(model, item)
-
         db.session.add(item)
         try:
             db.session.commit()
@@ -140,10 +138,6 @@ def update(model, item_id, data_in):
 
         db.session.refresh(item)
         return item
-
-
-def validate_update(model, item):
-    pass
 
 
 def delete(model, item_id):
