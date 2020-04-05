@@ -14,8 +14,8 @@ jobs:
   - python: nightly
 
 services:
-  - DB=mysql    mysql
-  - DB=postgres postgresql
+  - mysql
+  - postgresql
 
 # Install dependencies
 install:
