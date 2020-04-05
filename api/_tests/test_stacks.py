@@ -1,4 +1,4 @@
-from .client import client
+import pytest
 
 
 def path(action=""):
@@ -6,12 +6,12 @@ def path(action=""):
     return prefix + action
 
 
-def test_stacks_get():
+def test_stacks_get(client):
     response = client.get(path())
     assert response.status_code == 200
 
 
-def test_stacks_crud():
+def test_stacks_crud(client):
     # CREATE a stack.
     response = client.post(path(), json={"name": "Test Python"})
     assert response.status_code == 201

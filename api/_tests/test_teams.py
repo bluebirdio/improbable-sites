@@ -1,4 +1,23 @@
-from .client import client
+import pytest
+
+
+@pytest.fixture(scope="session")
+def test_team(client):
+    # Does the test team already exist?
+    response = client.get(path("test-team"))
+    if response.status_code == 200:
+        return response.json()
+
+    test_data = {"name": "Test Team", "description": "Test team description"}
+    response = client.post(path(), json=test_data)
+    assert response.status_code == 201
+    test_team = response.json()
+
+    # Test duplicate create: should fail.
+    response = client.post(path(), json=test_data)
+    assert response.status_code == 422
+
+    return test_team
 
 
 def path(action=""):
@@ -6,42 +25,30 @@ def path(action=""):
     return prefix + action
 
 
-def test_teams_get():
+def test_teams_list(client):
     response = client.get(path())
     assert response.status_code == 200
 
 
-def test_teams_crud():
-    # CREATE a team.
-    response = client.post(path(), json={"name": "Test Team",})
-    assert response.status_code == 201
-
-    content = response.json()
-    assert content["name"] == "Test Team"
-    team_id = content["id"]
-    assert team_id != ""
-
-    # CREATE duplicate team: should fail with 422.
-    response = client.post(path(), json={"id": team_id, "name": "Test Team",})
-    assert response.status_code == 422
-
-    # GET the new team.
-    response = client.get(path(team_id))
+def test_team_get(client, test_team):
+    response = client.get(path(test_team["id"]))
     assert response.status_code == 200
 
-    content = response.json()
-    assert content["name"] == "Test Team"
 
+def test_team_update(client, test_team):
     # UPDATE team.
     response = client.put(
-        path(team_id), json={"name": "Test Team", "description": "DESC"}
+        path(test_team["id"]), json={"name": "Test Team", "description": "DESC"}
     )
     assert response.status_code == 200
 
     content = response.json()
     assert content["description"] == "DESC"
 
-    # DELETE the team.
+
+def test_team_delete(client, test_team):
+    team_id = test_team["id"]
+
     response = client.delete(path(team_id))
     assert response.status_code == 204
 
