@@ -37,26 +37,3 @@ def update_app(*, id: str, app_in: App):
 @router.delete("/{id}", status_code=204)
 def delete_app(id: str):
     delete(tables.App, id)
-
-
-@router.get("/{id}/{environment}", response_model=Instance)
-def get_app_instance(id: str):
-    app = get_or_error(tables.App, id)
-    return app
-
-
-@router.put("/{id}/{environment}", response_model=Instance)
-def update_app_instance(*, id: str, app_in: App):
-    app = get_or_error(tables.App, id)
-
-    app_data = db_process_input(app_in, app)
-    if app_data:
-        return update(tables.App, app=app, data=app_data)
-    else:
-        return app
-
-
-@router.delete("/{id}/{environment}", status_code=204)
-def delete_app(id: str):
-    app = get_or_error(tables.App, id)
-    delete(app)
