@@ -1,4 +1,4 @@
-# Application hosting management API
+# Site management API
 Maintains a listing of managed sites and the resources they depend on.
 
 [![Build Status](https://travis-ci.com/bluebirdio/samey-sites.svg?branch=master)](https://travis-ci.com/bluebirdio/samey-sites)
