@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from api.core.db_crud import *
+from api.core.table_crud import *
 
 from . import tables
 from .models import *

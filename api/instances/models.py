@@ -1,6 +1,6 @@
 from pydantic import AnyUrl
 
-from api.core.db_crud import exists
+from api.core.table_crud import exists
 from api.core.models import *
 from api.repositories.values import RepositoryTargetType
 from api.stacks import tables as stack_tables
