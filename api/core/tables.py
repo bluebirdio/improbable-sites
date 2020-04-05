@@ -22,8 +22,6 @@ class ImprobableBaseDbModel:
         return {"mysql_engine": "InnoDB"}
 
     pk = Column(Integer(), primary_key=True)
-    # uuid = Column(UUID(as_uuid=True), default=uuid4, nullable=False, index=True, unique=True)
-    # TODO uuid column is pgsql-specific revert w/ pgsql or find a longer-term solution.
     uuid = Column(UUIDType(), nullable=False, default=uuid4)
     name = Column(String(255), nullable=False)
     created = Column(DateTime(), default=datetime.utcnow)
