@@ -19,4 +19,4 @@ def list_app_instances():
     return query(tables.Instance)
 
 
-# CRUD functions are in apps_instances and namespaced under the app/{app_id} space.
+# CRUD functions are in apps_instances and namespaced under app/{app_id}.
