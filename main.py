@@ -5,7 +5,6 @@ from sqlalchemy import create_engine
 
 from api.apps.api import router as apps
 from api.apps_instances.api import router as apps_instances
-from api.environments.api import router as environments
 from api.instances.api import router as instances
 from api.repositories.api import router as repositories
 from api.roles.api import router as roles
@@ -28,7 +27,6 @@ router = APIRouter()
 router.include_router(apps, prefix="/apps", tags=["Apps"])
 router.include_router(apps_instances, prefix="/apps", tags=["Apps"])
 router.include_router(instances, prefix="/instances", tags=["Apps"])
-router.include_router(environments, prefix="/environments", tags=["Apps"])
 router.include_router(stacks, prefix="/stacks", tags=["Stacks"])
 router.include_router(users, prefix="/users", tags=["Users and teams"])
 router.include_router(roles, prefix="/roles", tags=["Users and teams"])

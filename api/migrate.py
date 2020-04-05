@@ -1,7 +1,6 @@
 import sqlalchemy
 
 from api.apps.tables import *
-from api.environments.tables import *
 from api.instances.tables import *
 from api.repositories.tables import *
 from api.roles.tables import *
