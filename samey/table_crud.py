@@ -88,11 +88,6 @@ def db_get(model, item_id, query_filter=None):
         return item
 
 
-def get_by_name(model, item_name):
-    with db():
-        return db.session.query(model).filter(model.name == item_name).one_or_none()
-
-
 def create(model, data_in):
     data = db_process_input(data_in)
     item = model(**data)
