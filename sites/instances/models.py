@@ -2,8 +2,8 @@ from pydantic import AnyUrl
 
 from samey.table_crud import exists
 from samey.models import *
-from api.repositories.values import RepositoryTargetType
-from api.stacks import tables as stack_tables
+from sites.repositories.values import RepositoryTargetType
+from sites.stacks import tables as stack_tables
 
 from . import tables
 from .values import ProductionLevel

@@ -3,14 +3,14 @@ from fastapi import APIRouter, FastAPI
 from fastapi_sqlalchemy import DBSessionMiddleware, db
 from sqlalchemy import create_engine
 
-from api.applications.api import router as applications
-from api.instances.api import router as instances
-from api.repositories.api import router as repositories
-from api.roles.api import router as roles
-from api.settings import *
-from api.stacks.api import router as stacks
-from api.teams.api import router as teams
-from api.users.api import router as users
+from sites.applications.api import router as applications
+from sites.instances.api import router as instances
+from sites.repositories.api import router as repositories
+from sites.roles.api import router as roles
+from sites.settings import *
+from sites.stacks.api import router as stacks
+from sites.teams.api import router as teams
+from sites.users.api import router as users
 
 api = FastAPI()
 

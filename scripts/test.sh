@@ -3,4 +3,4 @@
 set -e
 set -x
 
-pytest --cov=api --cov-report=term-missing api ${@}
+pytest --cov=sites --cov-report=term-missing sites ${@}

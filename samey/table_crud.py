@@ -7,7 +7,7 @@ from fastapi_sqlalchemy import db
 from sqlalchemy.exc import IntegrityError
 
 from samey.tables import TextIdentified
-from api.settings import DATABASE_URL
+from sites.settings import DATABASE_URL
 
 
 def db_process_input(data_in, target=None):

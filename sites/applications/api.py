@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter
 
 from samey.table_crud import *
-from api.instances.api import applications_router
+from sites.instances.api import applications_router
 
 from . import tables
 from .models import *
