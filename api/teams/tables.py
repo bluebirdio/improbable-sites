@@ -9,11 +9,11 @@ class Team(TextIdentified, ImprobableDbModel, Description):
 
 class TeamMember(ImprobableDbModel):
     team_id = Column(
-        ForeignKey("team._id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
+        ForeignKey("team.id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
     )
     role_id = Column(
-        ForeignKey("role._id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
+        ForeignKey("role.id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
     )
     user_id = Column(
-        ForeignKey("user._id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
+        ForeignKey("user.id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
     )

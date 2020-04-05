@@ -49,20 +49,7 @@ ImprobableDbModel = declarative_base(cls=ImprobableBaseDbModel)
 
 
 class TextIdentified:
-    _id = Column(String(255), nullable=False, index=True, unique=True)
-
-    @hybrid_property
-    def id(self):
-        if self._id is None:
-            self._id = slugify(self.name)
-        return self._id
-
-    @id.setter
-    def id(self, set_id):
-        if set_id is not None:
-            self._id = slugify(set_id)
-        elif self.name is not None:
-            self._id = slugify(self.name)
+    id = Column(String(255), nullable=False, index=True, unique=True)
 
 
 class Description(object):

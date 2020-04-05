@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import Optional
 
-import slugify
-from pydantic import UUID4, BaseModel, Field, constr, validator
+from slugify import slugify
+from pydantic import UUID4, BaseModel, Field, constr, root_validator, validator
 
 
 class ImprobableBaseModel(BaseModel):
@@ -18,12 +18,14 @@ class ImprobableBaseModel(BaseModel):
 class ImprobableTextIdentified(ImprobableBaseModel):
     id: constr(min_length=2, max_length=255, strip_whitespace=True) = None
 
-    @validator("id", always=True)
-    def set_id(cls, v, values):
-        if v is not None:
-            return v
-        elif "name" in values:
-            return v or slugify(values["name"])
+    @root_validator
+    def set_id(cls, values):
+        if values["id"] is None:
+            if "name" in values:
+                values["id"] = slugify(values["name"])
+            else:
+                ValueError("Must specify id or name")
+        return values
 
 
 class ImprobableInternalAttributes(BaseModel):

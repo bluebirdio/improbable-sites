@@ -62,7 +62,7 @@ def item_query(q, model, item_id, query_filter=None):
     if item_id is int:
         q = q.filter(model.pk == item_id)
     elif issubclass(model, TextIdentified):
-        q = q.filter(model._id == item_id)
+        q = q.filter(model.id == item_id)
     else:
         item_uuid = shortuuid.decode(item_id)
         if item_uuid.version is None:

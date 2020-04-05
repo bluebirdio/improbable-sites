@@ -6,7 +6,7 @@ from api.core.tables import *
 from .values import RepositoryTargetType
 
 
-class Repository(ImprobableDbModel, TextIdentified, Description):
+class Repository(TextIdentified, ImprobableDbModel, Description):
     url = Column(String(255))
 
 
