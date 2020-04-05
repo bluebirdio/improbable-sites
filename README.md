@@ -1,9 +1,9 @@
 # Application hosting management API
 Maintains a listing of managed sites and the resources they depend on.
 
-[![Build Status](https://travis-ci.com/bluebirdio/improbable-sites.svg?branch=master)](https://travis-ci.com/bluebirdio/improbable-sites)
-[![Coverage](https://img.shields.io/codecov/c/github/bluebirdio/improbable-sites)](https://codecov.io/gh/bluebirdio/improbable-sites)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Build Status](https://travis-ci.com/bluebirdio/samey-sites.svg?branch=master)](https://travis-ci.com/bluebirdio/samey-sites)
+[![Coverage](https://img.shields.io/codecov/c/github/bluebirdio/samey-sites)](https://codecov.io/gh/bluebirdio/samey-sites)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b67737a1b443478905ca/maintainability)](https://codeclimate.com/github/bluebirdio/samey-sites/maintainability)
 
 Requires a Python 3.7 environment. Dependencies can be installed via:
 
