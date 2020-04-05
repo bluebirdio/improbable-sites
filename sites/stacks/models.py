@@ -4,6 +4,16 @@ from samey.table_crud import exists
 from . import tables
 
 
+class StackReference(BaseModel):
+    stack_id: str = ...
+
+    @validator("stack_id")
+    def stack_exists(cls, value):
+        if value is not None and not exists(tables.Stack, value):
+            raise ValueError("invalid stack_id")
+        return value
+
+
 class Stack(HasDescription, SameyTextIdentified):
     id: constr(
         min_length=2, max_length=15, strip_whitespace=True, regex="[a-z0-9]"

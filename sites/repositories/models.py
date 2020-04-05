@@ -1,11 +1,12 @@
 from pydantic import AnyUrl
 
 from samey.models import *
+from sites.teams.models import TeamReference
 
 from .values import RepositoryTargetType
 
 
-class Repository(HasDescription, SameyModel):
+class Repository(HasDescription, TeamReference, SameyModel):
     url: AnyUrl = None
 
 

@@ -7,7 +7,10 @@ from slugify import slugify
 
 class SameyModel(BaseModel):
     id: Optional[str] = Field(
-        None, title="Automatically-generated unique identifier", readOnly=True
+        None,
+        title="Automatically-generated unique identifier",
+        readOnly=True,
+        example="",
     )
     name: constr(min_length=2, max_length=255, strip_whitespace=True) = ...
 
