@@ -20,18 +20,18 @@ class ImprobableBaseDbTable:
     def __table_args__(self):
         return {"mysql_engine": "InnoDB"}
 
-    pk = Column(Integer(), primary_key=True)
-    uuid = Column(UUIDType(), nullable=False, default=uuid4)
-    name = Column(String(255), nullable=False)
-    created = Column(DateTime(), default=datetime.utcnow)
-    changed = Column(DateTime())
-
     @hybrid_property
     def id(self):
         try:
             return shortuuid.encode(self.uuid)
         except AttributeError:
             return
+
+    pk = Column(Integer(), primary_key=True)
+    uuid = Column(UUIDType(), nullable=False, default=uuid4)
+    name = Column(String(255), nullable=False)
+    created = Column(DateTime(), default=datetime.utcnow)
+    changed = Column(DateTime())
 
     @id.setter
     def id(self, set_id):
