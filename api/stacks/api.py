@@ -2,9 +2,8 @@ from typing import List
 
 from fastapi import APIRouter
 
-from api.core.table_crud import *
+from samey.table_crud import *
 
-from . import tables
 from .models import *
 
 router = APIRouter()

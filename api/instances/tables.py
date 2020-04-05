@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Enum, ForeignKey, UniqueConstraint
 
-from api.core.tables import *
+from samey.tables import *
 from api.repositories.values import RepositoryTargetType
 
 from .values import ProductionLevel

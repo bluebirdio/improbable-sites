@@ -1,6 +1,6 @@
 from pydantic import AnyUrl
 
-from api.core.models import *
+from samey.models import *
 
 from .values import RepositoryTargetType
 

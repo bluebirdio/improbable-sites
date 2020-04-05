@@ -1,7 +1,7 @@
 from sqlalchemy import Enum, ForeignKey
 from sqlalchemy.orm import relationship
 
-from api.core.tables import *
+from samey.tables import *
 
 from .values import RepositoryTargetType
 

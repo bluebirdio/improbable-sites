@@ -1,6 +1,6 @@
 from sqlalchemy import ForeignKey
 
-from api.core.tables import *
+from samey.tables import *
 
 
 class Application(TextIdentified, ImprobableTable, Description):

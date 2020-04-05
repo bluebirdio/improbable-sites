@@ -1,6 +1,6 @@
-from pydantic import Schema, SecretStr
+from pydantic import SecretStr
 
-from api.core.models import *
+from samey.models import *
 
 
 class TeamMember(ImprobableModel):

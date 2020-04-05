@@ -6,7 +6,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi_sqlalchemy import db
 from sqlalchemy.exc import IntegrityError
 
-from api.core.tables import TextIdentified
+from samey.tables import TextIdentified
 from api.settings import DATABASE_URL
 
 

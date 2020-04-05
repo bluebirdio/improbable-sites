@@ -3,9 +3,8 @@ from typing import List
 from fastapi import APIRouter
 
 from api.applications.tables import Application
-from api.core.table_crud import *
+from samey.table_crud import *
 
-from . import tables
 from .models import *
 
 # Top-level functions are included in the main app.

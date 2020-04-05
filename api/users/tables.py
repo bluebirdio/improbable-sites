@@ -1,4 +1,4 @@
-from api.core.tables import *
+from samey.tables import *
 
 
 class User(TextIdentified, ImprobableTable):

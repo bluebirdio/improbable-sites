@@ -1,5 +1,5 @@
-from api.core.table_crud import exists
-from api.core.models import *
+from samey.table_crud import exists
+from samey.models import *
 
 from . import tables
 

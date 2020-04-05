@@ -1,4 +1,4 @@
-from api.core.models import *
+from samey.models import *
 
 
 class Role(HasDescription, ImprobableTextIdentified):
