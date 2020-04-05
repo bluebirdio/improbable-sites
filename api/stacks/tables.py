@@ -6,7 +6,11 @@ from api.core.tables import *
 class Stack(TextIdentified, ImprobableDbModel, Description):
     parent_stack_id = Column(
         ForeignKey(
-            "stack._id", onupdate="CASCADE", ondelete="RESTRICT", use_alter=True
+            "stack._id",
+            onupdate="CASCADE",
+            ondelete="RESTRICT",
+            use_alter=True,
+            name="fk_stack_parent_stack_id",
         ),
         nullable=True,
     )
