@@ -3,7 +3,7 @@ from pydantic import AnyUrl
 from api.core.models import *
 
 
-class App(HasDescription, ImprobableTextIdentified):
+class Application(HasDescription, ImprobableTextIdentified):
     team_id: str = ...
 
 

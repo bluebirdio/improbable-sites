@@ -4,12 +4,12 @@ test_data = {"name": "Test Application", "description": "Test App Description"}
 
 
 def path(action=""):
-    prefix = "/v1/apps/"
+    prefix = "/v1/applications/"
     return prefix + action
 
 
 @pytest.fixture(scope="session")
-def test_app(client, test_team):
+def test_application(client, test_team):
     # Does the test app already exist?
     response = client.get(path("test-application"))
     if response.status_code == 200:
@@ -32,13 +32,13 @@ def test_app(client, test_team):
     return app
 
 
-def test_apps_list(client):
+def test_applications_list(client):
     response = client.get(path())
     assert response.status_code == 200
 
 
-def test_app_delete(client, test_app):
-    app_id = test_app["id"]
+def test_application_delete(client, test_application):
+    app_id = test_application["id"]
     response = client.delete(path(app_id))
     assert response.status_code == 204
 

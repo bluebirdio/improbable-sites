@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 from api.migrate import *
 from main import api
 
-from .test_apps import test_app
+from .test_applications import test_application
 from .test_teams import test_team
 
 
