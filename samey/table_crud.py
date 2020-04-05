@@ -92,22 +92,13 @@ def create(model, data_in):
     data = db_process_input(data_in)
     item = model(**data)
 
-    validate_create(model, item)
-    return db_create(item)
-
-
-def validate_create(model, item):
-    # If id exists (TextIdentified models) verify its uniqueness.
-    if item.id is not None:
-        if db_get(model, item.id):
-            raise HTTPException(422, "ID already exists.")
-
-
-def db_create(item):
     with db():
-        db.session.add(item)
-        db.session.commit()
-        db.session.refresh(item)
+        try:
+            db.session.add(item)
+            db.session.commit()
+            db.session.refresh(item)
+        except IntegrityError:
+            raise HTTPException(422, "ID already exists.")
     return item
 
 
@@ -142,16 +133,13 @@ def update(model, item_id, data_in):
 
 def delete(model, item_id):
     item = get_or_error(model, item_id)
-    db_delete(model, item.pk)
 
-
-def db_delete(model, pk):
     with db():
         # Enforce referential integrity for Sqlite
         if DATABASE_URL[:6] == "sqlite":
             db.session.execute("PRAGMA foreign_keys = ON")
         try:
-            db.session.query(model).filter(model.pk == pk).delete()
+            db.session.query(model).filter(model.pk == item.pk).delete()
             db.session.commit()
         except IntegrityError:
             raise HTTPException(
