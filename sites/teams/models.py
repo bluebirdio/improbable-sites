@@ -9,7 +9,7 @@ from . import tables
 
 
 class TeamReference(BaseModel):
-    team_id: str = ...
+    team_id: str = Field(..., example="teamname")
 
     @validator("team_id")
     def stack_exists(cls, value):

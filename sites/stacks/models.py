@@ -16,7 +16,7 @@ class StackReference(BaseModel):
 
 class Stack(HasDescription, SameyTextIdentified):
     id: constr(
-        min_length=2, max_length=15, strip_whitespace=True, regex="[a-z0-9]"
+        min_length=2, max_length=32, strip_whitespace=True, regex="[a-z0-9]"
     ) = None
     parent_stack_id: str = None
 
