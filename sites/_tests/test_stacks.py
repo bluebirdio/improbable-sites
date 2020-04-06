@@ -1,5 +1,7 @@
 import pytest
 
+from .crud import *
+
 
 def path(action=""):
     prefix = "/v1/stacks/"

@@ -1,5 +1,7 @@
 import pytest
 
+from .crud import *
+
 test_data = {"name": "Test Application", "description": "Test App Description"}
 
 
@@ -32,15 +34,5 @@ def test_application(client, test_team):
     return app
 
 
-def test_applications_list(client):
-    response = client.get(path())
-    assert response.status_code == 200
-
-
 def test_application_delete(client, test_application):
-    app_id = test_application["id"]
-    response = client.delete(path(app_id))
-    assert response.status_code == 204
-
-    response = client.get(path(app_id))
-    assert response.status_code == 404
+    path_delete(client, path(test_application["id"]))

@@ -1,5 +1,7 @@
 import pytest
 
+from .crud import *
+
 
 @pytest.fixture(scope="session")
 def test_team(client):
@@ -25,11 +27,6 @@ def path(action=""):
     return prefix + action
 
 
-def test_teams_list(client):
-    response = client.get(path())
-    assert response.status_code == 200
-
-
 def test_team_get(client, test_team):
     response = client.get(path(test_team["id"]))
     assert response.status_code == 200
@@ -47,10 +44,4 @@ def test_team_update(client, test_team):
 
 
 def test_team_delete(client, test_team):
-    team_id = test_team["id"]
-
-    response = client.delete(path(team_id))
-    assert response.status_code == 204
-
-    response = client.get(path(team_id))
-    assert response.status_code == 404
+    path_delete(client, path(test_team["id"]))
