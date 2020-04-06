@@ -49,7 +49,7 @@ def item_query(q, model, id=None, **kwargs):
         q = q.filter(model.pk == id)
     elif issubclass(model, TextIdentified):
         q = q.filter(model.id == id)
-    else:
+    elif id is not None:
         item_uuid = shortuuid.decode(id)
         if item_uuid.version is None:
             return None
