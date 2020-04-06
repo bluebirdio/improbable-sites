@@ -27,7 +27,14 @@ def list_applications():
     response_description="Create a new app.",
 )
 def create_application(app_in: Application):
-    return create(tables.Application, app_in)
+    application = create(tables.Application, app_in)
+
+    # Create a default instance group.
+    default_instance_group = ApplicationInstanceGroup(application_id=application.id, name="default", default=True)
+    create(tables.ApplicationInstanceGroup, default_instance_group)
+
+    # Return a reloaded application that includes the instance.
+    return get_or_error(tables.Application, application.id)
 
 
 @router.get("/{id}", response_model=Application)

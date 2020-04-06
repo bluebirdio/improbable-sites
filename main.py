@@ -15,6 +15,7 @@ from sites.users.api import router as users
 api = FastAPI()
 
 api.title = "Sites API"
+api.version = VERSION
 api.openapi_url = "/v1/openapi.json"
 
 db_engine = create_engine(DATABASE_URL, connect_args=DATABASE_ARGS)
@@ -38,7 +39,7 @@ api.include_router(router, prefix="/v1")
 async def root():
     return [
         {
-            "version": "1.0",
+            "version": VERSION,
             "name": "Original version",
             "url": "/v1"
         }
