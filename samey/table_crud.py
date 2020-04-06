@@ -25,60 +25,58 @@ def query(model, order_by="name", **kwargs):
     with db():
         q = db.session.query(model).order_by(order_by)
 
+
+    return q.all()
+
+
+def get_or_error(model, item_id, detail="Item not found", **kwargs):
+    with db():
+        item = db_get(model, id=item_id, **kwargs)
+        if item is None:
+            raise HTTPException(status_code=404, detail=detail)
+        return item
+
+
+def exists_or_error(model, item_id, detail="Item not found", **kwargs):
+    if not exists(model, id=item_id, **kwargs):
+        raise HTTPException(status_code=404, detail=detail)
+    else:
+        return True
+
+
+def item_query(q, model, id=None, **kwargs):
+    if id is int:
+        q = q.filter(model.pk == id)
+    elif issubclass(model, TextIdentified):
+        q = q.filter(model.id == id)
+    else:
+        item_uuid = shortuuid.decode(id)
+        if item_uuid.version is None:
+            return None
+        else:
+            q = q.filter(model.uuid == item_uuid)
+
     for key, val in kwargs.items():
         field = getattr(model, key)
         if field is not None:
             filter_value = field == val  # compute expression
             q = q.filter(filter_value)
 
-    return q.all()
-
-
-def get_or_error(model, item_id, detail="Item not found", query_filter=None):
-    with db():
-        item = db_get(model, item_id, query_filter)
-        if item is None:
-            raise HTTPException(status_code=404, detail=detail)
-        return item
-
-
-def exists_or_error(model, item_id, detail="Item not found", query_filter=None):
-    if not exists(model, item_id, query_filter):
-        raise HTTPException(status_code=404, detail=detail)
-    else:
-        return True
-
-
-def item_query(q, model, item_id, query_filter=None):
-    if item_id is int:
-        q = q.filter(model.pk == item_id)
-    elif issubclass(model, TextIdentified):
-        q = q.filter(model.id == item_id)
-    else:
-        item_uuid = shortuuid.decode(item_id)
-        if item_uuid.version is None:
-            return None
-        else:
-            q = q.filter(model.uuid == item_uuid)
-
-    if query_filter is not None:
-        q = q.filter(query_filter)
-
     return q
 
 
-def exists(model, item_id, query_filter=None):
+def exists(model, id=None, **kwargs):
     with db():
         q = db.session.query(model)
-        q = item_query(q, model, item_id, query_filter)
+        q = item_query(q, model, id=id, **kwargs)
 
         return db.session.query(q.exists()).scalar()
 
 
-def db_get(model, item_id, query_filter=None):
+def db_get(model, id=None, **kwargs):
     with db():
         q = db.session.query(model)
-        q = item_query(q, model, item_id, query_filter)
+        q = item_query(q, model, id=id, **kwargs)
 
         item = q.one_or_none()
 
