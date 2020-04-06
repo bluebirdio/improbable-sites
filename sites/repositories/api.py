@@ -10,21 +10,12 @@ from .models import *
 router = APIRouter()
 
 
-@router.get(
-    "/",
-    response_model=List[Repository],
-    response_description="Return a list of repositorys",
-)
+@router.get("/", response_model=List[Repository])
 def list_repositories():
     return query(tables.Repository)
 
 
-@router.post(
-    "/",
-    response_model=Repository,
-    status_code=201,
-    response_description="Create a new repository.",
-)
+@router.post("/", response_model=Repository, status_code=201)
 def create_repository(repo_in: Repository):
     return create(tables.Repository, repo_in)
 

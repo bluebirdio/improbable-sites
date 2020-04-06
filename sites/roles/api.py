@@ -10,16 +10,12 @@ from .models import *
 router = APIRouter()
 
 
-@router.get(
-    "/", response_model=List[Role], response_description="Return a list of roles"
-)
+@router.get("/", response_model=List[Role])
 def list_roles():
     return query(tables.Role)
 
 
-@router.post(
-    "/", response_model=Role, status_code=201, response_description="Create a new role."
-)
+@router.post("/", response_model=Role, status_code=201)
 def create_role(role_in: Role):
     return create(tables.Role, role_in)
 

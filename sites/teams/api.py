@@ -10,16 +10,12 @@ from .models import *
 router = APIRouter()
 
 
-@router.get(
-    "/", response_model=List[Team], response_description="Return a list of teams"
-)
+@router.get("/", response_model=List[Team])
 def list_teams():
     return query(tables.Team)
 
 
-@router.post(
-    "/", response_model=Team, status_code=201, response_description="Create a new team."
-)
+@router.post("/", response_model=Team, status_code=201)
 def create_team(team_in: Team):
     return create(tables.Team, team_in)
 

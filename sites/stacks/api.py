@@ -9,19 +9,12 @@ from .models import *
 router = APIRouter()
 
 
-@router.get(
-    "/", response_model=List[Stack], response_description="Return a list of stacks"
-)
+@router.get("/", response_model=List[Stack])
 def list_stacks():
     return query(tables.Stack)
 
 
-@router.post(
-    "/",
-    response_model=Stack,
-    status_code=201,
-    response_description="Create a new stack.",
-)
+@router.post("/", response_model=Stack, status_code=201)
 def create_stack(stack_in: Stack):
     return create(tables.Stack, stack_in)
 

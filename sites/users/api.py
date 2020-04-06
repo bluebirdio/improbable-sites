@@ -10,16 +10,12 @@ from .models import *
 router = APIRouter()
 
 
-@router.get(
-    "/", response_model=List[User], response_description="Return a list of users"
-)
+@router.get("/", response_model=List[User])
 def list_users():
     return query(tables.User)
 
 
-@router.post(
-    "/", response_model=User, status_code=201, response_description="Create a new user."
-)
+@router.post("/", response_model=User, status_code=201)
 def create_user(user_in: User):
     return create(tables.User, user_in)
 
