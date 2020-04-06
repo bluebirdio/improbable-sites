@@ -6,23 +6,7 @@ from sites.repositories.values import RepositoryTargetType
 from .values import ProductionLevel
 
 
-class InstanceGroup(SameyTable):
-    default = Column(Boolean, default=False)
-    application_id = Column(
-        ForeignKey("application.id", onupdate="CASCADE", ondelete="CASCADE"),
-        nullable=False,
-    )
-    stack_id = Column(
-        ForeignKey("stack.id", onupdate="CASCADE", ondelete="RESTRICT"), nullable=False
-    )
-    repository_id = Column(
-        ForeignKey("repository.id", onupdate="CASCADE", ondelete="RESTRICT"),
-        nullable=False,
-    )
 
-    __table_args__ = (
-        UniqueConstraint("name", "application_id", name="unique_name_application_id"),
-    )
 
 
 class Instance(SameyTable):
@@ -36,7 +20,7 @@ class Instance(SameyTable):
     )
     production_level = Column(Enum(ProductionLevel), nullable=False)
     instance_group_pk = Column(
-        ForeignKey("instance_group.pk", onupdate="CASCADE", ondelete="CASCADE"),
+        ForeignKey("application_instance_group.pk", onupdate="CASCADE", ondelete="CASCADE"),
         nullable=False,
     )
     repository_id = Column(
