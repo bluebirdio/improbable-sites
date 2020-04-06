@@ -22,12 +22,12 @@ class SameyModel(BaseModel):
 
 class SameyTextIdentified(SameyModel):
     id: constr(min_length=2, max_length=255, strip_whitespace=True) = Field(
-        ..., example="my-stuff"
+        None, example="item-id"
     )
 
     @root_validator
     def set_id(cls, values):
-        if values["id"] is None:
+        if id not in values or values["id"] is None:
             if "name" in values:
                 values["id"] = slugify(values["name"])
             else:
