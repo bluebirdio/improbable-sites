@@ -45,3 +45,7 @@ class Instance(SameyTable):
     )
     repository_target_type = Column(Enum(RepositoryTargetType), nullable=True)
     repository_target = Column(String(255))
+
+    __table_args__ = (
+        UniqueConstraint("name", "application_id", name="unique_name_application_id"),
+    )
