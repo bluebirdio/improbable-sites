@@ -10,16 +10,16 @@ class SameyModel(BaseModel):
         None,
         title="Automatically-generated unique identifier",
         readOnly=True,
-        example="",
+        example="U45VpinDPVetdEjNMF7sdo",
     )
-    name: constr(min_length=2, max_length=255, strip_whitespace=True) = ...
+    name: constr(min_length=2, max_length=255, strip_whitespace=True) = Field(..., example="My stuff")
 
     class Config:
         orm_mode = True
 
 
 class SameyTextIdentified(SameyModel):
-    id: constr(min_length=2, max_length=255, strip_whitespace=True) = None
+    id: constr(min_length=2, max_length=255, strip_whitespace=True) = Field(..., example="my-stuff")
 
     @root_validator
     def set_id(cls, values):
@@ -38,4 +38,4 @@ class SameyProperties(BaseModel):
 
 
 class HasDescription(BaseModel):
-    description: Optional[str] = None
+    description: Optional[str] = Field(None, example="User-supplied description.")
