@@ -12,14 +12,18 @@ class SameyModel(BaseModel):
         readOnly=True,
         example="U45VpinDPVetdEjNMF7sdo",
     )
-    name: constr(min_length=2, max_length=255, strip_whitespace=True) = Field(..., example="My stuff")
+    name: constr(min_length=2, max_length=255, strip_whitespace=True) = Field(
+        ..., example="My stuff"
+    )
 
     class Config:
         orm_mode = True
 
 
 class SameyTextIdentified(SameyModel):
-    id: constr(min_length=2, max_length=255, strip_whitespace=True) = Field(..., example="my-stuff")
+    id: constr(min_length=2, max_length=255, strip_whitespace=True) = Field(
+        ..., example="my-stuff"
+    )
 
     @root_validator
     def set_id(cls, values):

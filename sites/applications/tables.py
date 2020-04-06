@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Boolean, UniqueConstraint, SmallInteger
+from sqlalchemy import Boolean, ForeignKey, SmallInteger, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from samey.tables import *

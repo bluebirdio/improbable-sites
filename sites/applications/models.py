@@ -1,8 +1,11 @@
+from typing import List
+
+from pydantic import Field
+
 from samey.models import *
 from samey.table_crud import exists
 from sites.teams.models import TeamReference
-from typing import List
-from pydantic import Field
+
 from . import tables
 
 
@@ -15,7 +18,9 @@ class ApplicationInstanceGroupReference(BaseModel):
             raise ValueError("unable to validate instance_group with no application_id")
 
         application_id = values["application_id"]
-        if not exists(tables.ApplicationInstanceGroup, name=value, application_id=application_id):
+        if not exists(
+            tables.ApplicationInstanceGroup, name=value, application_id=application_id
+        ):
             raise ValueError("invalid instance_group")
         return value
 
@@ -31,11 +36,14 @@ class ApplicationReference(BaseModel):
 
 
 class ApplicationInstanceGroup(ApplicationReference, SameyModel):
-    name: constr(min_length=2, max_length=32, strip_whitespace=True, regex="[a-zA-Z0-9-.]") = Field(..., example="backend")
+    name: constr(
+        min_length=2, max_length=32, strip_whitespace=True, regex="[a-zA-Z0-9-.]"
+    ) = Field(..., example="backend")
 
 
 class Application(HasDescription, TeamReference, SameyTextIdentified):
     instance_groups: List[ApplicationInstanceGroup] = Field([], readOnly=True)
+
 
 #    production_url: Optional[AnyUrl] = None
 #    repository_url: Optional[AnyUrl] = None

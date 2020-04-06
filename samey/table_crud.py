@@ -25,7 +25,6 @@ def query(model, order_by="name", **kwargs):
     with db():
         q = db.session.query(model).order_by(order_by)
 
-
     return q.all()
 
 

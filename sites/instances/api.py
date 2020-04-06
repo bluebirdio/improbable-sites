@@ -11,12 +11,12 @@ from .models import *
 router = APIRouter()
 
 
-@router.get("/",response_model=List[Instance])
+@router.get("/", response_model=List[Instance])
 def list_instances():
     return query(tables.Instance)
 
 
-@router.post("/",status_code=201,response_model=Instance)
+@router.post("/", status_code=201, response_model=Instance)
 def create_instance(data_in: Instance):
     return create(tables.Instance, data_in)
 

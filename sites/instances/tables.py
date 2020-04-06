@@ -6,9 +6,6 @@ from sites.repositories.values import RepositoryTargetType
 from .values import ProductionLevel
 
 
-
-
-
 class Instance(SameyTable):
     url = Column(String(255))
     application_id = Column(
@@ -20,7 +17,9 @@ class Instance(SameyTable):
     )
     production_level = Column(Enum(ProductionLevel), nullable=False)
     instance_group_pk = Column(
-        ForeignKey("application_instance_group.pk", onupdate="CASCADE", ondelete="CASCADE"),
+        ForeignKey(
+            "application_instance_group.pk", onupdate="CASCADE", ondelete="CASCADE"
+        ),
         nullable=False,
     )
     repository_id = Column(

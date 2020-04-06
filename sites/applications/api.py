@@ -30,7 +30,9 @@ def create_application(app_in: Application):
     application = create(tables.Application, app_in)
 
     # Create a default instance group.
-    default_instance_group = ApplicationInstanceGroup(application_id=application.id, name="default", default=True)
+    default_instance_group = ApplicationInstanceGroup(
+        application_id=application.id, name="default", default=True
+    )
     create(tables.ApplicationInstanceGroup, default_instance_group)
 
     # Return a reloaded application that includes the instance.
