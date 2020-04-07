@@ -17,7 +17,7 @@ def test_team(client):
 
     # Test duplicate create: should fail.
     response = client.post(path(), json=test_data)
-    assert response.status_code == 422
+    assert response.status_code == 409
 
     return test_team
 
