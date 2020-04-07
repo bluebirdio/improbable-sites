@@ -16,9 +16,10 @@ def db_process_input(data_in, target=None):
     processed = {}
     for column, value in data_in.dict().items():
         # Do not permit changes to id.
-        if column == "id" and "id" in target_data:
-            continue
-        elif column not in target_data.keys() or target_data[column] != value:
+        if column == "id":
+            if value is None or "id" in target_data:
+                continue
+        if column not in target_data.keys() or target_data[column] != value:
             processed[column] = value
 
     return processed
@@ -97,8 +98,8 @@ def create(model, data_in):
             db.session.add(item)
             db.session.commit()
             db.session.refresh(item)
-        except IntegrityError:
-            raise HTTPException(422, "ID already exists.")
+        except IntegrityError as e:
+            raise HTTPException(409, "ID already exists.")
     return item
 
 
@@ -121,7 +122,7 @@ def update(model, item_id, data_in):
             db.session.commit()
         except IntegrityError:
             raise HTTPException(
-                status_code=422,
+                status_code=409,
                 detail="This update would break references. Not performing.",
             )
 
@@ -141,6 +142,6 @@ def delete(model, item_id):
             db.session.commit()
         except IntegrityError:
             raise HTTPException(
-                status_code=422,
+                status_code=409,
                 detail="Can't delete this item because it is still being referenced.",
             )
