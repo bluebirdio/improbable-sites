@@ -7,7 +7,6 @@ from sites.applications.models import (
     ApplicationInstanceGroupReference,
     ApplicationReference,
 )
-from sites.repositories.values import RepositoryTargetType
 from sites.stacks.models import StackReference
 
 from . import tables
@@ -20,7 +19,6 @@ class Instance(
     application: Application = Field(None, readOnly=True)
     environment: Environment = ...
     url: Optional[AnyUrl] = None
-    # repository_url: str = ...
     # repository_target_type: RepositoryTargetType = ...
     # repository_target: str = ...
 

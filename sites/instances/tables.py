@@ -2,7 +2,6 @@ from sqlalchemy import Enum, ForeignKey, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from samey.tables import *
-from sites.repositories.values import RepositoryTargetType
 
 from .values import Environment
 
@@ -22,15 +21,6 @@ class Instance(SameyTable):
     environment = Column(Enum(Environment), nullable=False)
 
     instance_group = Column(String(255))
-
-    repository_id = Column(
-        ForeignKey("repository.id", onupdate="CASCADE", ondelete="RESTRICT"),
-        nullable=True,
-    )
-
-    repository_target_type = Column(Enum(RepositoryTargetType), nullable=True)
-
-    repository_target = Column(String(255))
 
     __table_args__ = (
         UniqueConstraint("name", "application_id", name="unique_name_application_id"),
