@@ -20,8 +20,15 @@ def list_instances():
 def create_instance(data_in: Instance):
     # Do not permit more than one production environment per instance group.
     if data_in.environment == "production":
-        if exists(tables.Instance, environment="production", instance_group=data_in.instance_group):
-            raise HTTPException(status_code=409, detail="Can not have more than one production instance per instance group")
+        if exists(
+            tables.Instance,
+            environment="production",
+            instance_group=data_in.instance_group,
+        ):
+            raise HTTPException(
+                status_code=409,
+                detail="Can not have more than one production instance per instance group",
+            )
     return create(tables.Instance, data_in)
 
 

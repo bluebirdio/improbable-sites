@@ -24,9 +24,18 @@ class Instance(
 
     @root_validator()
     def unique_name(cls, values):
-        if "application_id" in values and "name" in values and "instance_group" in values:
-            item = db_get(tables.Instance, application_id=values["application_id"], instance_group=values["instance_group"], name=values["name"])
+        if (
+            "application_id" in values
+            and "name" in values
+            and "instance_group" in values
+        ):
+            item = db_get(
+                tables.Instance,
+                application_id=values["application_id"],
+                instance_group=values["instance_group"],
+                name=values["name"],
+            )
             if item is not None:
                 if "id" not in values or item.id != values["id"]:
-                    raise ValueError("Name is not unique.", )
+                    raise ValueError("Name is not unique.",)
         return values
