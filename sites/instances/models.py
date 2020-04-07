@@ -1,7 +1,7 @@
 from pydantic import AnyUrl
 
 from samey.models import *
-from samey.table_crud import exists
+from samey.table_crud import db_get
 from sites.applications.models import (
     ApplicationInstanceGroupReference,
     ApplicationReference,
@@ -21,3 +21,12 @@ class Instance(
     # repository_url: str = ...
     # repository_target_type: RepositoryTargetType = ...
     # repository_target: str = ...
+
+    @root_validator()
+    def unique_name(cls, values):
+        if "application_id" in values and "name" in values and "instance_group" in values:
+            item = db_get(tables.Instance, application_id=values["application_id"], instance_group=values["instance_group"], name=values["name"])
+            if item is not None:
+                if "id" not in values or item.id != values["id"]:
+                    raise ValueError("Name is not unique.", )
+        return values

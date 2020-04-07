@@ -18,6 +18,10 @@ def list_instances():
 
 @router.post("/", status_code=201, response_model=Instance)
 def create_instance(data_in: Instance):
+    # Do not permit more than one production environment per instance group.
+    if data_in.environment == "production":
+        if exists(tables.Instance, environment="production", instance_group=data_in.instance_group):
+            raise HTTPException(status_code=409, detail="Can not have more than one production instance per instance group")
     return create(tables.Instance, data_in)
 
 
@@ -31,7 +35,7 @@ def delete_instance(id: str):
     delete(tables.Instance, id)
 
 
-# Instances belong to applications and applications/apy.py will include these functions under applications/{id}.
+# applications/apy.py will include these functions under applications/{id}/instances.
 applications_router = APIRouter()
 
 

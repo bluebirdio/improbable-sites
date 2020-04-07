@@ -10,10 +10,10 @@ from . import tables
 class ApplicationInstanceGroupReference(BaseModel):
     instance_group: str = Field(default="default")
 
-    @validator("instance_group")
+    @validator("instance_group", pre=True)
     def instance_group_exists(cls, value, values):
         if "application_id" not in values:
-            raise ValueError("unable to validate instance_group with no application_id")
+            raise ValueError("unable to validate instance_group without a valid application_id")
 
         application_id = values["application_id"]
         if not exists(
