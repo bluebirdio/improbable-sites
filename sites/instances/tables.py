@@ -35,3 +35,4 @@ class Instance(SameyTable):
     __table_args__ = (
         UniqueConstraint("name", "application_id", name="unique_name_application_id"),
     )
+    application = relationship("Application", lazy="subquery")

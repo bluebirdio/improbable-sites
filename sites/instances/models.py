@@ -3,6 +3,7 @@ from pydantic import AnyUrl
 from samey.models import *
 from samey.table_crud import db_get
 from sites.applications.models import (
+    Application,
     ApplicationInstanceGroupReference,
     ApplicationReference,
 )
@@ -16,6 +17,7 @@ from .values import Environment
 class Instance(
     StackReference, ApplicationInstanceGroupReference, ApplicationReference, SameyModel
 ):
+    application: Application = Field(None, readOnly=True)
     environment: Environment = ...
     url: Optional[AnyUrl] = None
     # repository_url: str = ...
