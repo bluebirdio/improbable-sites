@@ -1,6 +1,6 @@
 from os import environ
 
-VERSION = "0.0.1"
+VERSION = "0.1.0"
 
 LISTEN_HOST = environ.get("LISTEN_HOST", "0.0.0.0")
 LISTEN_PORT = environ.get("LISTEN_PORT", 8000)
