@@ -9,25 +9,27 @@ def path(action=""):
 
 
 def test_stacks_crud(client):
+    default_stack = default_items()["stacks"]
+
     # CREATE a stack.
-    response = client.post(path(), json={"name": "Test Python"})
+    response = client.post(path(), json=default_stack)
     assert response.status_code == 201
 
     content = response.json()
-    assert content["name"] == "Test Python"
+    assert content["name"] == "Test Stack"
     stack_id = content["id"]
     assert stack_id != ""
 
     # CREATE duplicate stack: should fail with 422.
     response = client.post(path(), json={"id": stack_id, "name": "Test Python"})
-    assert response.status_code == 422
+    assert response.status_code == 409
 
     # GET the new stack.
     response = client.get(path(stack_id))
     assert response.status_code == 200
 
     content = response.json()
-    assert content["name"] == "Test Python"
+    assert content["name"] == "Test Stack"
 
     # UPDATE stack.
     response = client.put(
@@ -54,7 +56,7 @@ def test_stacks_crud(client):
 
     # DELETE the original stack: should fail because it has a derivative.
     response = client.delete(path(stack_id))
-    assert response.status_code == 422
+    assert response.status_code == 409
 
     # DELETE the derivative first
     response = client.delete(path(child_stack_id))
