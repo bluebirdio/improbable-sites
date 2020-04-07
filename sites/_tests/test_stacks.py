@@ -20,7 +20,7 @@ def test_stacks_crud(client):
 
     # CREATE duplicate stack: should fail with 422.
     response = client.post(path(), json={"id": stack_id, "name": "Test Python"})
-    assert response.status_code == 422
+    assert response.status_code == 409
 
     # GET the new stack.
     response = client.get(path(stack_id))
@@ -54,7 +54,7 @@ def test_stacks_crud(client):
 
     # DELETE the original stack: should fail because it has a derivative.
     response = client.delete(path(stack_id))
-    assert response.status_code == 422
+    assert response.status_code == 409
 
     # DELETE the derivative first
     response = client.delete(path(child_stack_id))
