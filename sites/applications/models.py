@@ -1,7 +1,5 @@
 from typing import List
 
-from pydantic import Field
-
 from samey.models import *
 from samey.table_crud import exists
 from sites.teams.models import TeamReference
