@@ -15,7 +15,10 @@ def db_process_input(data_in, target=None):
 
     processed = {}
     for column, value in data_in.dict().items():
-        if column not in target_data.keys() or target_data[column] != value:
+        # Do not permit changes to id.
+        if column == "id" and "id" in target_data:
+            continue
+        elif column not in target_data.keys() or target_data[column] != value:
             processed[column] = value
 
     return processed
@@ -100,16 +103,14 @@ def create(model, data_in):
 
 
 def update(model, item_id, data_in):
-    data = db_process_input(data_in)
-    if id in data and data["id"] != item_id:
-        raise HTTPException(status_code=422, detail="Can not change ID.")
+    item = get_or_error(model, item_id)
+    data = db_process_input(data_in, item)
 
     with db():
         # Enforce referential integrity for Sqlite
         if DATABASE_URL[:6] == "sqlite":
             db.session.execute("PRAGMA foreign_keys = ON")
 
-        item = get_or_error(model, item_id)
         for column, value in data.items():
             if value != getattr(item, column):
                 setattr(item, "changed", datetime.utcnow())

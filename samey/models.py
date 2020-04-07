@@ -27,7 +27,7 @@ class SameyTextIdentified(SameyModel):
 
     @root_validator
     def set_id(cls, values):
-        if id not in values or values["id"] is None:
+        if values["id"] is None:
             if "name" in values:
                 values["id"] = slugify(values["name"])
             else:
