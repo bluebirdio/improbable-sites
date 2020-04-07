@@ -22,10 +22,7 @@ class ApplicationInstanceGroup(SameyTable):
     stack_id = Column(
         ForeignKey("stack.id", onupdate="CASCADE", ondelete="RESTRICT"), nullable=True
     )
-    repository_id = Column(
-        ForeignKey("repository.id", onupdate="CASCADE", ondelete="RESTRICT"),
-        nullable=True,
-    )
+    repository_url = Column(String(255), nullable=True)
 
     __table_args__ = (
         UniqueConstraint("name", "application_id", name="unique_name_application_id"),

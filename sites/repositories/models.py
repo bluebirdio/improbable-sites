@@ -6,6 +6,10 @@ from sites.teams.models import TeamReference
 from .values import RepositoryTargetType
 
 
+class RepositoryReference(BaseModel):
+    repository_url: AnyUrl = None
+
+
 class Repository(HasDescription, TeamReference, SameyModel):
     url: AnyUrl = None
 

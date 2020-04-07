@@ -2,6 +2,7 @@ from typing import List
 
 from samey.models import *
 from samey.table_crud import exists
+from sites.repositories.models import RepositoryReference
 from sites.teams.models import TeamReference
 
 from . import tables
@@ -13,7 +14,9 @@ class ApplicationInstanceGroupReference(BaseModel):
     @validator("instance_group", pre=True)
     def instance_group_exists(cls, value, values):
         if "application_id" not in values:
-            raise ValueError("unable to validate instance_group without a valid application_id")
+            raise ValueError(
+                "unable to validate instance_group without a valid application_id"
+            )
 
         application_id = values["application_id"]
         if not exists(
@@ -33,15 +36,13 @@ class ApplicationReference(BaseModel):
         return value
 
 
-class ApplicationInstanceGroup(ApplicationReference, SameyModel):
+class ApplicationInstanceGroup(RepositoryReference, ApplicationReference, SameyModel):
     name: constr(
         min_length=2, max_length=32, strip_whitespace=True, regex="[a-zA-Z0-9-.]"
     ) = Field(..., example="backend")
 
 
-class Application(HasDescription, TeamReference, SameyTextIdentified):
+class Application(
+    HasDescription, RepositoryReference, TeamReference, SameyTextIdentified
+):
     instance_groups: List[ApplicationInstanceGroup] = Field([], readOnly=True)
-
-
-#    production_url: Optional[AnyUrl] = None
-#    repository_url: Optional[AnyUrl] = None
