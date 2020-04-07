@@ -3,7 +3,7 @@ from sqlalchemy import Boolean, Enum, ForeignKey, UniqueConstraint
 from samey.tables import *
 from sites.repositories.values import RepositoryTargetType
 
-from .values import ProductionLevel
+from .values import Environment
 
 
 class Instance(SameyTable):
@@ -15,7 +15,7 @@ class Instance(SameyTable):
     stack_id = Column(
         ForeignKey("stack.id", onupdate="CASCADE", ondelete="RESTRICT"), nullable=False
     )
-    production_level = Column(Enum(ProductionLevel), nullable=False)
+    environment = Column(Enum(Environment), nullable=False)
     instance_group_pk = Column(
         ForeignKey(
             "application_instance_group.pk", onupdate="CASCADE", ondelete="CASCADE"

@@ -10,13 +10,13 @@ from sites.repositories.values import RepositoryTargetType
 from sites.stacks.models import StackReference
 
 from . import tables
-from .values import ProductionLevel
+from .values import Environment
 
 
 class Instance(
     StackReference, ApplicationInstanceGroupReference, ApplicationReference, SameyModel
 ):
-    production_level: ProductionLevel = ...
+    environment: Environment = ...
     url: Optional[AnyUrl] = None
     # repository_url: str = ...
     # repository_target_type: RepositoryTargetType = ...

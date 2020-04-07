@@ -1,8 +1,8 @@
 import enum
 
 
-class ProductionLevel(str, enum.Enum):
-    PRODUCTION = "PRODUCTION"
-    STAGING = "STAGING"
-    TEST = "TEST"
-    DEVELOPMENT = "DEVELOPMENT"
+class Environment(str, enum.Enum):
+    production = "production"
+    staging = "staging"
+    testing = "testing"
+    development = "development"
