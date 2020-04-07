@@ -8,6 +8,9 @@ class Application(TextIdentified, SameyTable, HasDescription):
     team_id = Column(
         ForeignKey("team.id", onupdate="CASCADE", ondelete="CASCADE"), nullable=False
     )
+
+    repository_url = Column(String(255), nullable=True)
+
     instance_groups = relationship("ApplicationInstanceGroup", lazy="subquery")
 
 
@@ -18,7 +21,6 @@ class ApplicationInstanceGroup(SameyTable):
     )
     sort = Column(SmallInteger)
 
-    # TODO do these live here or can they be derived from the prod URL?
     stack_id = Column(
         ForeignKey("stack.id", onupdate="CASCADE", ondelete="RESTRICT"), nullable=True
     )
