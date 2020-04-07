@@ -27,5 +27,9 @@ class ApplicationInstanceGroup(SameyTable):
     repository_url = Column(String(255), nullable=True)
 
     __table_args__ = (
-        UniqueConstraint("name", "application_id", name="unique_application_instance_group_name_application_id"),
+        UniqueConstraint(
+            "name",
+            "application_id",
+            name="unique_application_instance_group_name_application_id",
+        ),
     )

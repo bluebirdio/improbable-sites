@@ -23,6 +23,8 @@ class Instance(SameyTable):
     instance_group = Column(String(255))
 
     __table_args__ = (
-        UniqueConstraint("name", "application_id", name="unique_instance_name_application_id"),
+        UniqueConstraint(
+            "name", "application_id", name="unique_instance_name_application_id"
+        ),
     )
     application = relationship("Application", lazy="subquery")
