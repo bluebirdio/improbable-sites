@@ -29,7 +29,7 @@ def test_application(client, test_team):
 
     # Creating a duplicate app should fail.
     response = client.post(path(), json=test_data)
-    assert response.status_code == 422
+    assert response.status_code == 409
 
     return app
 
