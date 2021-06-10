@@ -1,5 +1,5 @@
 # Main FastAPI functionality
-fastapi==0.52.0
+fastapi==0.65.2
 uvicorn==0.11.7
 
 # Database support
